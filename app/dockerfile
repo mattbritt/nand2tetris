@@ -1,4 +1,4 @@
-# Start from node base image
+﻿# Start from node base image
 FROM  node 
 
 # Less messages during docker build
@@ -27,6 +27,7 @@ CMD if [ ${APP_ENV} = production ]; \
 		cd build && \
 		hs -p 3000; \
 	else \
+		echo "CHOKIDAR_USEPOLLING=true" >> .env && \
 		npm run start; \
 	fi
 
