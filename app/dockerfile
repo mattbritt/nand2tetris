@@ -28,6 +28,7 @@ CMD if [ ${APP_ENV} = production ]; \
 		hs -p 3000; \
 	else \
 		echo "CHOKIDAR_USEPOLLING=true" >> .env && \
+		npm install &&\
 		npm run start; \
 	fi
 
