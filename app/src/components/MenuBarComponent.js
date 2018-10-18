@@ -49,6 +49,13 @@ class MenuBarComponent extends Component {
                         <a href="#">About</a>
                     </div>
                 </div>
+
+                <div id="loginButton">
+                    <a href="#">
+                        <FontAwesomeIcon
+                                icon='user'/> Login
+                    </a>
+                </div>
             </div> // navbar
         );
     }
