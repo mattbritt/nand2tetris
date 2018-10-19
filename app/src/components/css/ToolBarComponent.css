@@ -1,0 +1,26 @@
+/*
+    This is the css to style the ToolBar
+*/
+
+.toolBar {
+
+    overflow: hidden;
+    background-color: grey;
+}
+
+.toolBar a {
+    text-decoration: none;
+    font-size: 50px;
+    color: white;
+    padding: 10px;
+}
+.toolBar a:hover {
+    background-color: rgb(27, 26, 26);
+}
+
+.vr {
+    display: inline-block;
+    height: 40px;
+    border-left: 6px solid black;
+    margin: 0;
+}
