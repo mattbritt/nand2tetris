@@ -10,23 +10,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 class MenuBarComponent extends Component {
     render(){
         return (
-            <div class="navbar">
-                <div class='dropdown'>
-                    <button class='dropbtn'>File <FontAwesomeIcon 
+            <div className="navbar">
+                <div className='dropdown'>
+                    <button className='dropbtn'>File <FontAwesomeIcon 
                             icon="caret-down"/>
                     </button>                    
-                    <div class='dropdown-content'>
+                    <div className='dropdown-content'>
                         <a href="#">Load Chip</a>
                         <a href="#">Load script</a>
                         <hr></hr>
                         <a href="#">Exit</a>
                     </div> 
                 </div> {/* dropdown */}
-                <div class='dropdown'>
-                    <button class='dropbtn'>Run <FontAwesomeIcon 
+                <div className='dropdown'>
+                    <button className='dropbtn'>Run <FontAwesomeIcon 
                                 icon='caret-down'/>
                     </button>
-                    <div class='dropdown-content'>
+                    <div className='dropdown-content'>
                         <a href="#">Single Step</a>
                         <a href="#">Run</a>
                         <a href="#">Stop</a>
@@ -40,11 +40,11 @@ class MenuBarComponent extends Component {
 
                 </div> {/* dropdown */}
 
-                <div class='dropdown'>
-                    <button class='dropbtn'>Help <FontAwesomeIcon
+                <div className='dropdown'>
+                    <button className='dropbtn'>Help <FontAwesomeIcon
                                 icon='caret-down'/>
                     </button>
-                    <div class='dropdown-content'>
+                    <div className='dropdown-content'>
                         <a href="#">Usage</a>
                         <a href="#">About</a>
                     </div>

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 
 import MenuBar from "./containers/MenuBar";
 import ToolBar from "./containers/ToolBar";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faUser, faMicrochip, faPlay, faStop,
      faBackward, faStepForward, faCalculator, faClock, faScroll, faFlag } from '@fortawesome/free-solid-svg-icons'
 library.add(faCaretDown)
