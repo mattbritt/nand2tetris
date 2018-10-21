@@ -6,6 +6,7 @@
     overflow: hidden;
     background-color: #333;
     font-family: Arial;
+    height: 45px;
 }
 
 .navbar a {

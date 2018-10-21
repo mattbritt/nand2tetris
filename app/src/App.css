@@ -31,3 +31,38 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+#mainWindow {
+  display: grid;
+
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 115px auto 50px; 
+
+  height: 100vh;
+  width: 100vw;
+}
+
+
+#headerDiv {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+#mainDiv {
+  
+  background-color: red;
+}
+
+.halfDiv {
+
+  border: 5px solid blue;
+  background-color: green;
+
+}
+
+#footerDiv {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background: red;
+
+}

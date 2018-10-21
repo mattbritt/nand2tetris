@@ -5,10 +5,14 @@ import './App.css';
 import MenuBar from "./containers/MenuBar";
 import ToolBar from "./containers/ToolBar";
 
+import NameBox from "./containers/NameBox";
+
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faUser, faMicrochip, faPlay, faStop,
      faBackward, faStepForward, faCalculator, faClock, faScroll, faFlag } from '@fortawesome/free-solid-svg-icons'
+
 library.add(faCaretDown)
 library.add(faUser);
 library.add(faMicrochip);
@@ -32,9 +36,24 @@ class App extends Component {
 
   render() {
     return (
-     <div>
-       <MenuBar></MenuBar>
-       <ToolBar></ToolBar>
+     <div id='mainWindow'>
+       <div id='headerDiv'>
+        <MenuBar></MenuBar>
+        <ToolBar></ToolBar>
+      </div>
+  
+        <div className='halfDiv'>
+          <NameBox></NameBox>
+        </div>
+        <div className='halfDiv'>
+          
+        </div>
+
+
+      <div id='footerDiv'>
+      
+      </div>
+
      </div>
     );
   }
