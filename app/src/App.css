@@ -50,13 +50,14 @@
 
 #mainDiv {
   
-  background-color: red;
+  /* background-color: red; */
 }
 
 .halfDiv {
-
-  border: 5px solid blue;
-  background-color: green;
+margin: 0px;
+  /* border: 5px solid blue; */
+  background-color: #333;
+  color: white;
   height: 100%;
 }
 
