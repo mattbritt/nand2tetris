@@ -23,6 +23,7 @@
 .NameBox input {
     margin: 5px;
     flex: auto;
+    border-radius: 3px;
 }
 
 .NameBox > div {
