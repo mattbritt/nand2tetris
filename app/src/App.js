@@ -7,6 +7,8 @@ import ToolBar from "./containers/ToolBar";
 
 import NameBox from "./containers/NameBox";
 
+import StatusBar from "./containers/StatusBar";
+
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -51,7 +53,7 @@ class App extends Component {
 
 
       <div id='footerDiv'>
-      
+        <StatusBar></StatusBar>
       </div>
 
      </div>

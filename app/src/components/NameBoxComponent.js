@@ -1,5 +1,5 @@
 /*
-    This component contians the view for the NameBox
+    This component contains the view for the NameBox
 */
 
 import React, { Component } from 'react';
@@ -10,10 +10,12 @@ class NameBoxComponent extends Component {
         return (
             <div className='NameBox'>
                 <p>Chip Name: </p> 
-                <input type='text' disabled></input>
+                <input type='text' disabled
+                    placeholder='ALU'></input>
                 <div>
                     <p>Time:</p>
-                    <input type='text' disabled></input>
+                    <input type='text' disabled
+                        placeholder='0'></input>
                 </div>
             </div>
 

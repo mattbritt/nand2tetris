@@ -24,6 +24,7 @@
     margin: 5px;
     flex: auto;
     border-radius: 3px;
+    padding-left: 10px;
 }
 
 .NameBox > div {
