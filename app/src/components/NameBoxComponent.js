@@ -9,6 +9,12 @@ class NameBoxComponent extends Component {
     render() {
         return (
             <div className='NameBox'>
+                <p>Chip Name: </p> 
+                <input type='text' disabled></input>
+                <div>
+                    <p>Time:</p>
+                    <input type='text' disabled></input>
+                </div>
             </div>
 
         );
