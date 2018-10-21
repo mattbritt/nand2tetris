@@ -1,0 +1,27 @@
+/*
+    This css file styles the CellViewerWithTitle component
+*/
+
+.CellViewerWithTitle {
+     display: flex;
+    flex-direction: column; 
+
+    border: 2px solid grey;
+    border-radius: 4px;
+
+    height: 100%;
+
+}
+
+.CellViewerWithTitle span {
+    height: 30px;
+    border: 2px solid grey;
+}
+
+.CellViewerWithTitle p {
+    margin: 5px 0 0 10px;
+    font-weight: bold;
+    height: 100%;
+
+}
+

@@ -9,6 +9,8 @@ import NameBox from "./containers/NameBox";
 
 import StatusBar from "./containers/StatusBar";
 
+import CellViewer from "./containers/CellViewer";
+import CellViewerWithTitle from "./containers/CellViewerWithTitle";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -45,10 +47,21 @@ class App extends Component {
       </div>
   
         <div className='halfDiv'>
-          <NameBox></NameBox>
+
+          <div id='pinsHdlDiv'>
+            <NameBox className='NameBox'></NameBox>
+            <CellViewerWithTitle title="Input Pins"></CellViewerWithTitle>
+
+            <CellViewerWithTitle title="Output Pins"></CellViewerWithTitle>
+
+            <CellViewerWithTitle title="HDL"></CellViewerWithTitle>
+
+            <CellViewerWithTitle title="Internal Pins"></CellViewerWithTitle>
+
+          </div>
         </div>
         <div className='halfDiv'>
-          
+          <CellViewer></CellViewer>
         </div>
 
 

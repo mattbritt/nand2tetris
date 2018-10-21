@@ -1,0 +1,42 @@
+/*
+    This is the styling for the CellViewer
+*/
+
+.CellViewerWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+
+}
+
+.CellViewer {
+    display: table;
+
+    height: 100%;
+    width: 100%;
+}
+
+.CellViewer table {
+
+    table-layout: fixed;
+    display: block;
+    overflow: auto;
+     height: 100%;
+     width: 100%;
+}
+
+.CellViewer > table > tbody {
+    overflow: auto;
+
+}
+
+.CellViewer td, th{
+    border: 1px solid black;
+    height: 15px;
+    width: 5%;
+    padding-left: 15px;
+    margin: 0;
+    /* white-space: normal; /* Only needed when it's set differntly somewhere else */
+    /* word-wrap: break-word; */ 
+}
