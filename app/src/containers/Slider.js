@@ -1,0 +1,3 @@
+/*
+    This Container manages the logic for the Slider
+*/

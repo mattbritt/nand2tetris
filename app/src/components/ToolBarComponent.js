@@ -10,48 +10,48 @@ class ToolBarComponent extends Component {
     render (){
         return (
             <div class="toolBar">
-                <a href="#">
-                    <FontAwesomeIcon
-                        icon='microchip' />
-                </a>
-                <a href="#">
-                    <FontAwesomeIcon
-                        icon='step-forward' />
-                </a>
-                <a href="#">
-                    <FontAwesomeIcon
-                        icon='play' />
-                </a>
-                <a href="#">
-                    <FontAwesomeIcon
-                        icon='stop' />
-                </a>
-                <a href="#">
-                    <FontAwesomeIcon
-                        icon='backward' />
-                </a>
-                <div class="vr"></div>
-
-                <a href="#">
-                    <FontAwesomeIcon
-                        icon='calculator' />
-                </a>
-                <a href="#">
-                    <FontAwesomeIcon
-                        icon='clock' />
-                </a>
-
-                <div class="vr"></div>
-                
-                <a href="#">
-                    <FontAwesomeIcon
-                        icon='scroll' />
-                </a>
-                <a href="#">
-                    <FontAwesomeIcon
-                        icon='flag' />
-                </a>
-                <div class="vr"></div>
+                <div class="toolBarDivider">
+                    <a href="#">
+                        <FontAwesomeIcon
+                            icon='microchip' />
+                    </a>
+                    <a href="#">
+                        <FontAwesomeIcon
+                            icon='step-forward' />
+                    </a>
+                    <a href="#">
+                        <FontAwesomeIcon
+                            icon='play' />
+                    </a>
+                    <a href="#">
+                        <FontAwesomeIcon
+                            icon='stop' />
+                    </a>
+                    <a href="#">
+                        <FontAwesomeIcon
+                            icon='backward' />
+                    </a>
+                </div>
+                <div class='toolBarDivider'>
+                    <a href="#">
+                        <FontAwesomeIcon
+                            icon='calculator' />
+                    </a>
+                    <a href="#">
+                        <FontAwesomeIcon
+                            icon='clock' />
+                    </a>
+                </div>
+                <div class="toolBarDivider">
+                    <a href="#">
+                        <FontAwesomeIcon
+                            icon='scroll' />
+                    </a>
+                    <a href="#">
+                        <FontAwesomeIcon
+                            icon='flag' />
+                    </a>
+                </div>
 
                 <input type='range' min='0' max='5'></input>
 
