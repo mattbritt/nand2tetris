@@ -68,6 +68,19 @@
     color: #e5e5e5;
   }
 
+  #loginForm select {
+    border-radius: 5px;
+    height: 40px;
+    width: 400px;
+    margin: 0 20px 20px 5px;
+    padding: 5px;
+    font-size: 16pt;
+    background-color: grey;
+    border: none;
+    color: #e5e5e5;
+  }
+
+
   #loginForm input:focus {
     outline: none;
   }
