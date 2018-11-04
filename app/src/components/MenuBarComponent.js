@@ -5,9 +5,24 @@ import React, { Component } from 'react';
 import './css/MenuBarComponent.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import LoginModal from "../containers/LoginModal";
+
 
 
 class MenuBarComponent extends Component {
+
+    state = {show: false};
+
+    showLoginModal = () => 
+    {
+        this.setState({show: true});
+    }
+
+    hideLoginModal = () =>
+    {
+        this.setState({show: false});
+    }
+
     render(){
         return (
             <div className="navbar">
@@ -51,11 +66,12 @@ class MenuBarComponent extends Component {
                 </div>
 
                 <div id="loginButton">
-                    <a href="#">
+                    <a onClick={this.showLoginModal}>
                         <FontAwesomeIcon
                                 icon='user'/> Login
                     </a>
                 </div>
+                <LoginModal show={this.state.show} handleClose={this.hideLoginModal}></LoginModal>
             </div> // navbar
         );
     }
