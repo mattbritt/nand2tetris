@@ -10,11 +10,47 @@ class LoginModalComponent extends Component {
     constructor(props) {
         super(props);
 
+        // set to null unless we have at least one user in dropdown / select
+        var userId = null;
 
+        try{
+            userId = this.props.userJson[0].id;
+        }
+        catch(err){
+            
+        }
+
+        console.log("userId: " + userId)
+        
+        this.state = { 'userId': userId}
+
+        this.updateUsernameSelectValue = this.updateUsernameSelectValue.bind(this);
         this.handleUserSubmit = this.handleUserSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps){
+        var userId = null;
+        try{
+            userId = nextProps.userJson[0].id;
+        }
+        catch(err){}
+
+        console.log("userId: " + userId);
+        this.setState({userId: userId})
+    }
+
+    updateUsernameSelectValue(event){
+        this.setState({userId: event.target.value},
+            ()=>{console.log(this.state.userId)})   // need callback to ensure we're using updated state
+
+    }
+
     handleUserSubmit() {
+        // ignore if no user
+        if(this.state.userId === null) return;
+
+        this.props.handleLogin(this.state.userId);
+
         this.props.handleClose();
     }
 
@@ -35,9 +71,10 @@ class LoginModalComponent extends Component {
                                 <label>Username</label>
                             </span>
                             <span>
-                                <select id='usernameInput'>
+                                <select id='usernameSelect' onChange={this.updateUsernameSelectValue}>
                                     {this.props.userJson.map(user =>
-                                        <option value={user.id}>{user.username}</option>
+                                        <option key={user.id} 
+                                            value={user.id}>{user.username}</option>
                                         )}
                                 </select>
                             </span>

@@ -1,0 +1,19 @@
+#loginButton {
+    float: right;
+    
+}
+
+#loggedInDisplay {
+    float: right;
+    text-align: center;
+    padding: 12px 16px;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: firebrick;
+}
+
+#cogIcon {
+    margin-left: 5px;
+    color: black;
+}

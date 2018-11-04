@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 
+import backendSettings from './backendSettings.json';
+
 import MenuBar from "./containers/MenuBar";
 import ToolBar from "./containers/ToolBar";
 
@@ -15,7 +17,8 @@ import CellViewerWithTitle from "./containers/CellViewerWithTitle";
 import { library } from '@fortawesome/fontawesome-svg-core'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faUser, faMicrochip, faPlay, faStop,
-     faBackward, faStepForward, faCalculator, faClock, faScroll, faFlag } from '@fortawesome/free-solid-svg-icons'
+     faBackward, faStepForward, faCalculator, faClock, faScroll, faFlag, faCog
+       } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faCaretDown)
 library.add(faUser);
@@ -28,13 +31,40 @@ library.add(faCalculator);
 library.add(faClock);
 library.add(faScroll);
 library.add(faFlag);
+library.add(faCog);
 
 class App extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      users:  []
-     };
+      super(props);
+      this.state = {
+        user:  {}
+      };
+      
+      this.handleLogin = this.handleLogin.bind(this);
+    
+    }
+
+    handleLogin(userId)
+    {
+      console.log("userId: " + userId);
+      
+      if(userId){
+        var url = backendSettings.backendUrl;
+        url += '/users/' + userId;
+
+        fetch(url)
+            .then((response)=>{
+              return response.json();
+            })
+            .then((userJson)=>{
+              console.log("json for logging in user: ")
+              console.log(userJson);
+
+              this.setState({user: userJson[0]})
+            })
+
+      }
+
     }
 
 
@@ -42,7 +72,10 @@ class App extends Component {
     return (
      <div id='mainWindow'>
        <div id='headerDiv'>
-        <MenuBar></MenuBar>
+        <MenuBar 
+          handleLogin={this.handleLogin}
+          userInfo={this.state.user}
+        ></MenuBar>
         <ToolBar></ToolBar>
       </div>
   

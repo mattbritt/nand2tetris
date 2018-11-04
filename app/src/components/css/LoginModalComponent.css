@@ -79,7 +79,9 @@
     border: none;
     color: #e5e5e5;
   }
-
+#loginForm select:focus {
+  outline: none;
+}
 
   #loginForm input:focus {
     outline: none;

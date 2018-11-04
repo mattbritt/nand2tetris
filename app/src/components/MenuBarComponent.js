@@ -6,6 +6,7 @@ import './css/MenuBarComponent.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import LoginModal from "../containers/LoginModal";
+import LoginButton from '../containers/LoginButton';
 
 
 
@@ -65,13 +66,22 @@ class MenuBarComponent extends Component {
                     </div>
                 </div>
 
-                <div id="loginButton">
+                <LoginButton
+                    showLoginModal={this.showLoginModal}
+                    userInfo={this.props.userInfo}
+                >
+                </LoginButton>
+            {/*<div id="loginButton">
                     <a onClick={this.showLoginModal}>
                         <FontAwesomeIcon
                                 icon='user'/> Login
                     </a>
-                </div>
-                <LoginModal show={this.state.show} handleClose={this.hideLoginModal}></LoginModal>
+        </div> */}
+                <LoginModal 
+                    show={this.state.show} 
+                    handleClose={this.hideLoginModal}
+                    handleLogin={this.props.handleLogin}    
+                ></LoginModal>
             </div> // navbar
         );
     }

@@ -10,7 +10,11 @@ class MenuBar extends Component {
     
     render() {
         return (
-            <MenuBarComponent></MenuBarComponent>
+            <MenuBarComponent 
+                handleLogin={this.props.handleLogin}
+                userInfo={this.props.userInfo}
+                >
+            </MenuBarComponent>
         );
     }
 }

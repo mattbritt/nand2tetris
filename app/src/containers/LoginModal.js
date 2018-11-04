@@ -37,7 +37,12 @@ class LoginModal extends Component {
 
     render() {
         return (
-            <LoginModalComponent show={this.props.show} userJson={this.state.userJson} handleClose={this.props.handleClose}></LoginModalComponent>
+            <LoginModalComponent 
+                show={this.props.show}
+                userJson={this.state.userJson} 
+                handleClose={this.props.handleClose}
+                handleLogin={this.props.handleLogin}    
+            ></LoginModalComponent>
         );
     }
 }
