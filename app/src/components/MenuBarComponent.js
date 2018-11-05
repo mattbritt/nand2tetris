@@ -69,6 +69,7 @@ class MenuBarComponent extends Component {
                 <LoginButton
                     showLoginModal={this.showLoginModal}
                     userInfo={this.props.userInfo}
+                    handleLogout={this.props.handleLogout}
                 >
                 </LoginButton>
             {/*<div id="loginButton">

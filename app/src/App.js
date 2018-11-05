@@ -41,13 +41,18 @@ class App extends Component {
       };
       
       this.handleLogin = this.handleLogin.bind(this);
+      this.handleLogout = this.handleLogout.bind(this);
     
+    }
+
+    handleLogout()
+    {
+      this.setState({user: {}})
     }
 
     handleLogin(userId)
     {
-      console.log("userId: " + userId);
-      
+      // if there's a userId then get the user data from server
       if(userId){
         var url = backendSettings.backendUrl;
         url += '/users/' + userId;
@@ -57,14 +62,9 @@ class App extends Component {
               return response.json();
             })
             .then((userJson)=>{
-              console.log("json for logging in user: ")
-              console.log(userJson);
-
               this.setState({user: userJson[0]})
             })
-
       }
-
     }
 
 
@@ -75,6 +75,7 @@ class App extends Component {
         <MenuBar 
           handleLogin={this.handleLogin}
           userInfo={this.state.user}
+          handleLogout={this.handleLogout}
         ></MenuBar>
         <ToolBar></ToolBar>
       </div>

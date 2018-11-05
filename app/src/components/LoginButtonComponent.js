@@ -20,10 +20,20 @@ class LoginButtonComponent extends Component {
           </div>) ;
 
         var loggedInDisplayJsx = (
-            <div id='loggedInDisplay'>
-                Welcome {this.props.userInfo.username} 
-                <FontAwesomeIcon id='cogIcon'
-                        icon='cog' />
+            <div id='loggedInDisplay'
+                className='dropdown'>
+                <button className='dropbtn'>
+                    Welcome {this.props.userInfo.username} 
+                    <FontAwesomeIcon id='cogIcon'
+                            icon='cog' />
+                </button>
+                <div className='dropdown-content'>
+                    <a href='#'>Manage Account</a>
+                    <hr></hr>
+                    <a href='#'
+                        onClick={this.props.handleLogout}
+                    >Logout</a>
+                </div>
             </div>
         );
 

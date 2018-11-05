@@ -13,6 +13,7 @@ class LoginButton extends Component {
             <LoginButtonComponent
                 showLoginModal={this.props.showLoginModal}
                 userInfo={this.props.userInfo}
+                handleLogout={this.props.handleLogout}
             >
             </LoginButtonComponent>
         )
