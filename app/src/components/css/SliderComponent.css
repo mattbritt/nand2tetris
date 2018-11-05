@@ -4,7 +4,11 @@
 
 .Slider {
     display: inline-block;
+    flex-direction: column;
     height: 4px;
+    margin: 0;
+    padding: 0;
+    width: 150px;
 }
 
 .sliderText {
