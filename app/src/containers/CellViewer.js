@@ -8,7 +8,9 @@ import CellViewerComponent from '../components/CellViewerComponent.js';
 class CellViewer extends Component {
     render() {
         return (
-            <CellViewerComponent></CellViewerComponent>
+            <CellViewerComponent
+                data={this.props.data}
+            ></CellViewerComponent>
         )
     }
 }

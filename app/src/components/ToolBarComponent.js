@@ -13,7 +13,9 @@ class ToolBarComponent extends Component {
         return (
             <div className="toolBar">
                 <div className="toolBarDivider">
-                    <a href="#" className='tooltip'>
+                    <a  className='tooltip'
+                        onClick={this.props.handleShowLoadChipModal}                    
+                    >
                         <FontAwesomeIcon
                             icon='microchip' />
                             <span className='tooltiptext'>Load Chip</span>

@@ -14,6 +14,7 @@ class MenuBar extends Component {
                 handleLogin={this.props.handleLogin}
                 userInfo={this.props.userInfo}
                 handleLogout={this.props.handleLogout}
+                handleShowLoadChipModal={this.props.handleShowLoadChipModal}
                 >
             </MenuBarComponent>
         );

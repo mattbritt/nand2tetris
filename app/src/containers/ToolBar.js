@@ -9,9 +9,9 @@ class ToolBar extends Component {
 
     render() {
         return (
-            <ToolBarComponent>
-
-            </ToolBarComponent>
+            <ToolBarComponent
+                handleShowLoadChipModal={this.props.handleShowLoadChipModal}
+            ></ToolBarComponent>
         )
     }
 }

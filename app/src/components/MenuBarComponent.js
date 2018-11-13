@@ -7,22 +7,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import LoginModal from "../containers/LoginModal";
 import LoginButton from '../containers/LoginButton';
+import LoadChipModal from '../containers/LoadChipModal';
 
 
 
 class MenuBarComponent extends Component {
 
-    state = {show: false};
+    state = {
+                showLoginModal: false
+            };
 
     showLoginModal = () => 
     {
-        this.setState({show: true});
+        this.setState({showLoginModal: true});
     }
 
     hideLoginModal = () =>
     {
-        this.setState({show: false});
+        this.setState({showLoginModal: false});
     }
+
+
+
 
     render(){
         return (
@@ -32,7 +38,7 @@ class MenuBarComponent extends Component {
                             icon="caret-down"/>
                     </button>                    
                     <div className='dropdown-content'>
-                        <a href="#">Load Chip</a>
+                        <a onClick={this.props.handleShowLoadChipModal}>Load Chip</a>
                         <a href="#">Load script</a>
                         <hr></hr>
                         <a href="#">Exit</a>
@@ -72,17 +78,14 @@ class MenuBarComponent extends Component {
                     handleLogout={this.props.handleLogout}
                 >
                 </LoginButton>
-            {/*<div id="loginButton">
-                    <a onClick={this.showLoginModal}>
-                        <FontAwesomeIcon
-                                icon='user'/> Login
-                    </a>
-        </div> */}
+
                 <LoginModal 
-                    show={this.state.show} 
+                    show={this.state.showLoginModal} 
                     handleClose={this.hideLoginModal}
                     handleLogin={this.props.handleLogin}    
                 ></LoginModal>
+
+
             </div> // navbar
         );
     }

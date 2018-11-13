@@ -11,6 +11,8 @@ import NameBox from "./containers/NameBox";
 
 import StatusBar from "./containers/StatusBar";
 
+import LoadChipModal from './containers/LoadChipModal';
+
 import CellViewer from "./containers/CellViewer";
 import CellViewerWithTitle from "./containers/CellViewerWithTitle";
 
@@ -37,12 +39,24 @@ class App extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        user:  {}
+        user:  {},
+        showLoadChipModal: false,
+        chips: []
       };
       
       this.handleLogin = this.handleLogin.bind(this);
       this.handleLogout = this.handleLogout.bind(this);
     
+    }
+
+    showLoadChipModal = () =>
+    {
+        this.setState({showLoadChipModal: true});
+    }
+
+    hideLoadChipModal = () =>
+    {
+        this.setState({showLoadChipModal: false});
     }
 
     handleLogout()
@@ -66,6 +80,31 @@ class App extends Component {
             })
       }
     }
+  
+  loadChips(userId)
+  {
+    if(!userId)
+      return;
+
+    var url = backendSettings.backendUrl;
+    url += '/users/' + userId + '/chips';
+
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((chipsJson) => {
+        console.log("chips Json");
+        console.log(chipsJson);
+///////// Dummy data to get view working //////////
+        //this.setState({chips: chipsJson});
+        var dummyChips = [
+          { chipName: "And", filename: "and.hdl"},
+          { chipName: "Or", filename: "or.hdl"},
+          { chipName: "ALU", filename: "alu.hdl"}
+        ]
+      })
+  }
 
 
   render() {
@@ -76,8 +115,11 @@ class App extends Component {
           handleLogin={this.handleLogin}
           userInfo={this.state.user}
           handleLogout={this.handleLogout}
+          handleShowLoadChipModal={this.showLoadChipModal}
         ></MenuBar>
-        <ToolBar></ToolBar>
+        <ToolBar
+          handleShowLoadChipModal={this.showLoadChipModal}
+        ></ToolBar>
       </div>
   
         <div className='halfDiv'>
@@ -102,6 +144,12 @@ class App extends Component {
       <div id='footerDiv'>
         <StatusBar></StatusBar>
       </div>
+
+      <LoadChipModal 
+        show={this.state.showLoadChipModal}
+        handleClose={this.hideLoadChipModal}
+        chips={this.state.chips}
+      ></LoadChipModal>
 
      </div>
     );

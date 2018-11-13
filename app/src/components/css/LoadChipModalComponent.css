@@ -1,0 +1,9 @@
+#chipViewer {
+    display: block;
+    height: 300px;
+    width: 500px;
+    color: white;
+    border: 1px solid white;
+    margin: 0;
+    padding: 10px;
+}
