@@ -22,6 +22,8 @@ class LoadChipModalComponent extends Component {
                     <div id='chipViewer'>
                         <CellViewer
                             data={this.props.data}
+                            selectedRow={this.props.selectedChip}
+                            handleRowClick={this.props.handleChipSelect}
                         >
                         </CellViewer>
                     </div>

@@ -17,8 +17,13 @@ class LoadChipModal extends Component {
             dataArray: []
         }
 
-        this.state = { chips: defaultChips }
+        this.state = { 
+                        chips: defaultChips,
+                        selectedChip: null
+                     }
 
+        this.handleChipSelect = this.handleChipSelect.bind(this);
+        this.handleLoad = this.handleLoad.bind(this);
     }
 
 
@@ -32,9 +37,26 @@ class LoadChipModal extends Component {
             dataArray: this.props.chips
         }
 
-        this.setState({chips: newChips});
+        this.setState({
+                        chips: newChips
+                        });
 
     }
+
+    handleLoad()
+    {
+        if(this.state.selectedChip === null)
+            return;
+
+        this.props.handleLoad(this.state.selectedChip);
+        this.props.handleClose();
+    }
+
+    handleChipSelect(chipId){
+        console.log("handleChipSelect")
+        this.setState({ selectedChip: chipId });
+    }
+
 
     render(){
 
@@ -42,6 +64,9 @@ class LoadChipModal extends Component {
             <LoadChipModalComponent
                 show={this.props.show}
                 handleClose={this.props.handleClose}
+                handleLoad={this.handleLoad}
+                handleChipSelect={this.handleChipSelect}
+                selectedChip={this.state.selectedChip}
                 data={this.state.chips}
             ></LoadChipModalComponent>
         )

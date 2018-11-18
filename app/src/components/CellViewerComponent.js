@@ -15,20 +15,28 @@ class CellViewerComponent extends Component {
         {
             datum = this.props.data.dataArray.map((rowArray, index) =>
             {
+                var thisClass = "";
                 var rowId;
                 var dataRow =
                     Object.keys(rowArray).map((key, index2) =>{
-                        var thisClass = "selectedRow";
+                        
                         if(key == "id")
                         {
                             rowId = rowArray[key];
+                            if(rowId == this.props.selectedRowId)
+                                thisClass = "selectedRow";
                             return;
                         }
                         return <td className={thisClass} 
                                     key={index2}>{rowArray[key]}</td>});
 
                 
-                return (<tr onClick={this.props.handleRowClick.bind(this, rowId)} key={rowId}>{dataRow}</tr>)
+                return (<tr 
+                                    onClick={ this.props.handleRowClick != null
+                                        ? this.props.handleRowClick.bind(this, rowId)
+                                        : ()=>{ }}
+                            key={rowId}
+                            className={thisClass}>{dataRow}</tr>)
             }
             )
         }

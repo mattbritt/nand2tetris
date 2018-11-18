@@ -41,16 +41,25 @@ class App extends Component {
       this.state = {
         user:  {},
         showLoadChipModal: false,
-        chips: []
+        chips: [],
+        loggedIn: false
       };
       
       this.handleLogin = this.handleLogin.bind(this);
       this.handleLogout = this.handleLogout.bind(this);
+      this.handleLoadChip = this.handleLoadChip.bind(this);
     
+    }
+
+    handleLoadChip(chipId)
+    {
+      console.log("handleLoadChip")
+      console.log(chipId)
     }
 
     showLoadChipModal = () =>
     {
+      if(this.state.loggedIn)
         this.setState({showLoadChipModal: true});
     }
 
@@ -61,7 +70,7 @@ class App extends Component {
 
     handleLogout()
     {
-      this.setState({user: {}, chips: []})
+      this.setState({user: {}, chips: [], loggedIn: false})
     }
 
     handleLogin(userId)
@@ -76,7 +85,7 @@ class App extends Component {
               return response.json();
             })
             .then((userJson)=>{
-              this.setState({user: userJson[0]})
+              this.setState({user: userJson[0], loggedIn: true})
               this.loadChips(userId);
             })
       }
@@ -162,7 +171,9 @@ class App extends Component {
       <LoadChipModal 
         show={this.state.showLoadChipModal}
         handleClose={this.hideLoadChipModal}
+        handleLoad={this.handleLoadChip}
         chips={this.state.chips}
+        loggedIn={this.state.loggedIn}
       ></LoadChipModal>
 
      </div>
