@@ -57,6 +57,7 @@ class App extends Component {
       this.handleTickTock = this.handleTickTock.bind(this);
       this.handleLoadScript = this.handleLoadScript.bind(this);
       this.handleBreakpoints = this.handleBreakpoints.bind(this);
+      this.handleAnimationSpeedChange = this.handleAnimationSpeedChange.bind(this);
     
     }
 
@@ -134,6 +135,11 @@ class App extends Component {
       // console.log("breakpoints")
     }
   
+    handleAnimationSpeedChange(value){
+      // console.log("handleAnimationSpeedChange")
+      // console.log(value)
+    }
+
   loadChips(userId)
   {
 
@@ -202,6 +208,7 @@ class App extends Component {
           handleTickTock={this.handleTickTock}
           handleLoadScript={this.handleLoadScript}
           handleBreakpoints={this.handleBreakpoints}
+          handleAnimationSpeedChange={this.handleAnimationSpeedChange}
         ></ToolBar>
       </div>
   

@@ -68,7 +68,9 @@ class ToolBarComponent extends Component {
 
 
                     <div className='tooltip'>
-                        <Slider id='animationSpeedSlider'></Slider>
+                        <Slider id='animationSpeedSlider'
+                            handleValueChange={this.props.handleAnimationSpeedChange}
+                        ></Slider>
                         <span className='tooltiptext'>Animation Speed</span>
                     </div>
                 

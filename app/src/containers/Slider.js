@@ -9,7 +9,9 @@ class Slider extends Component {
 
     render() {
         return (
-            <SliderComponent></SliderComponent>
+            <SliderComponent
+                handleValueChange={this.props.handleValueChange}
+            ></SliderComponent>
         );
     }
 }
