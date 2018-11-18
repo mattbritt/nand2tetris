@@ -37,9 +37,6 @@ class LoginButtonComponent extends Component {
             </div>
         );
 
-            console.log("user info: ");
-            console.log(this.props.userInfo)
-
         return (
             <div>
                 { this.props.userInfo.username ?  loggedInDisplayJsx : loginButtonJsx }

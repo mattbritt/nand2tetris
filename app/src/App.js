@@ -61,7 +61,7 @@ class App extends Component {
 
     handleLogout()
     {
-      this.setState({user: {}})
+      this.setState({user: {}, chips: []})
     }
 
     handleLogin(userId)
@@ -77,34 +77,48 @@ class App extends Component {
             })
             .then((userJson)=>{
               this.setState({user: userJson[0]})
+              this.loadChips(userId);
             })
       }
     }
   
   loadChips(userId)
   {
+
     if(!userId)
       return;
+
 
     var url = backendSettings.backendUrl;
     url += '/users/' + userId + '/chips';
 
-    fetch(url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((chipsJson) => {
-        console.log("chips Json");
-        console.log(chipsJson);
-///////// Dummy data to get view working //////////
-        //this.setState({chips: chipsJson});
+
+//     fetch(url)
+//       .then((response) => {
+//         console.log("loadchips B")
+
+//         return response.json();
+//       })
+//       .then((chipsJson) => {
+//         console.log("chips Json");
+//         console.log(chipsJson);
+// ///////// Dummy data to get view working //////////
+//         //this.setState({chips: chipsJson});
+//         var dummyChips = [
+//           { chipName: "And", filename: "and.hdl"},
+//           { chipName: "Or", filename: "or.hdl"},
+//           { chipName: "ALU", filename: "alu.hdl"}
+//         ];
+//         this.setState({chips: dummyChips})
+//       })
         var dummyChips = [
-          { chipName: "And", filename: "and.hdl"},
-          { chipName: "Or", filename: "or.hdl"},
-          { chipName: "ALU", filename: "alu.hdl"}
-        ]
-      })
-  }
+          { id: 1, chipName: "And", filename: "and.hdl"},
+          { id: 2, chipName: "Or", filename: "or.hdl"},
+          { id: 3, chipName: "ALU", filename: "alu.hdl"}
+        ];
+          this.setState({chips: dummyChips})
+
+}
 
 
   render() {

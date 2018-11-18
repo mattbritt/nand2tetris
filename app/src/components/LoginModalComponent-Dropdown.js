@@ -20,7 +20,6 @@ class LoginModalComponent extends Component {
             
         }
 
-        console.log("userId: " + userId)
         
         this.state = { 'userId': userId}
 
@@ -35,13 +34,12 @@ class LoginModalComponent extends Component {
         }
         catch(err){}
 
-        console.log("userId: " + userId);
         this.setState({userId: userId})
     }
 
     updateUsernameSelectValue(event){
-        this.setState({userId: event.target.value},
-            ()=>{console.log(this.state.userId)})   // need callback to ensure we're using updated state
+        this.setState({userId: event.target.value}/*,
+            ()=>{console.log(this.state.userId)}*/)   // need callback to ensure we're using updated state
 
     }
 

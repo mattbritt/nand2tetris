@@ -18,21 +18,16 @@ class LoginModal extends Component {
 
     
     componentDidMount() {
-        // if (this.props.show) {
             var url = backendSettings.backendUrl;
             url += '/users';
-
-            console.log(url);
 
             fetch(url)
                 .then((response) => {
                     return response.json();
                 })
                 .then((userJson) => {
-                    console.log(userJson);
                     this.setState({'userJson': userJson});
                 })
-        // }
     }
 
     render() {

@@ -6,82 +6,62 @@ import React, { Component } from 'react';
 import './css/CellViewerComponent.css';
 
 class CellViewerComponent extends Component {
+
     render() {
+
+        var datum;
+
+        if(this.props.data)
+        {
+            datum = this.props.data.dataArray.map((rowArray, index) =>
+            {
+                var rowId;
+                var dataRow =
+                    Object.keys(rowArray).map((key, index2) =>{
+                        var thisClass = "selectedRow";
+                        if(key == "id")
+                        {
+                            rowId = rowArray[key];
+                            return;
+                        }
+                        return <td className={thisClass} 
+                                    key={index2}>{rowArray[key]}</td>});
+
+                
+                return (<tr onClick={this.props.handleRowClick.bind(this, rowId)} key={rowId}>{dataRow}</tr>)
+            }
+            )
+        }
+        else
+        {
+            datum = ( <tr>
+                <td>x[1]</td>
+                <td>1</td>
+            </tr>)
+        }
+
         return (
             <div className='CellViewerWrapper'>
                 <div className='CellViewer'>
                     <table>
                     <tbody>
-                        <tr>
-                            <th>Name</th>
-                            <th>Value</th>
-                        </tr>
+
+                        { this.props.data ? 
+                        ( <tr>
+                                {this.props.data.columnTitles.map((title, index) => {                                   <th key>{title}</th>
+                                   return  (<th key={index}>{title}</th>)})}
+                        </tr>)
+                        :
+                         (   <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                            </tr>)
+                        }
                         
-                            <tr></tr>
-                            <tr>
-                                <td>x[1]</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>x[2]</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>x[3]</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>x[4]</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <td>x[5]</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>x[6]</td>
-                                <td>6</td>
-                            </tr>
-                            <tr>
-                                <td>x[7]</td>
-                                <td>7</td>
-                            </tr>
-                            <tr>
-                                <td>x[8]</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>x[9]</td>
-                                <td>9</td>
-                            </tr>
-                            <tr>
-                                <td>x[10]</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <td>x[11]</td>
-                                <td>11</td>
-                            </tr>
-                            <tr>
-                                <td>x[12]</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <td>x[13]</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>x[13]</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>x[13]</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td>x[13]</td>
-                                <td>13</td>
-                            </tr>
+                        
+                        {datum}
+
+            
                         </tbody>
                     </table>
                 </div>

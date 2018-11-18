@@ -11,22 +11,33 @@ class LoadChipModal extends Component {
     constructor(props){
         super(props);
 
-        this.state = { chips: {} }
+
+        var defaultChips = {
+            columnTitles: ["Please Login"],
+            dataArray: []
+        }
+
+        this.state = { chips: defaultChips }
+
     }
 
-    componentDidMount(){
+
+    componentWillReceiveProps(){
         if(!this.props.chips)
             return;
 
+
         var newChips = {
-            columnTitle: ["Chip Name", "File"],
+            columnTitles: ["Chip Name", "File"],
             dataArray: this.props.chips
         }
+
+        this.setState({chips: newChips});
 
     }
 
     render(){
-        console.log("render")
+
         return (
             <LoadChipModalComponent
                 show={this.props.show}
