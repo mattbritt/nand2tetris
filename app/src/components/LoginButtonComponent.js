@@ -28,9 +28,9 @@ class LoginButtonComponent extends Component {
                             icon='cog' />
                 </button>
                 <div className='dropdown-content'>
-                    <a href='#'>Manage Account</a>
+                    <a href=''>Manage Account</a>
                     <hr></hr>
-                    <a href='#'
+                    <a href=''
                         onClick={this.props.handleLogout}
                     >Logout</a>
                 </div>

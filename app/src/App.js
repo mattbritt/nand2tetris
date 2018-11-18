@@ -42,7 +42,8 @@ class App extends Component {
         user:  {},
         showLoadChipModal: false,
         chips: [],
-        loggedIn: false
+        loggedIn: false,
+        chipName: "User Not Logged In"
       };
       
       this.handleLogin = this.handleLogin.bind(this);
@@ -148,7 +149,9 @@ class App extends Component {
         <div className='halfDiv'>
 
           <div id='pinsHdlDiv'>
-            <NameBox className='NameBox'></NameBox>
+            <NameBox className='NameBox'
+                chipName={this.state.chipName}
+              ></NameBox>
             <CellViewerWithTitle title="Input Pins"></CellViewerWithTitle>
 
             <CellViewerWithTitle title="Output Pins"></CellViewerWithTitle>

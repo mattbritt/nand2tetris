@@ -9,7 +9,9 @@ class NameBox extends Component {
 
     render() {
         return (
-            <NameBoxComponent></NameBoxComponent>
+            <NameBoxComponent
+                chipName={this.props.chipName}
+            ></NameBoxComponent>
         );
     }
 }

@@ -7,3 +7,23 @@
     margin: 0;
     padding: 10px;
 }
+
+.loadChipModalButtons {
+    display: flex;
+    flex-direction: row;
+
+}
+.loadChipModalButtons > button {
+    width: 150px;
+    height: 45px;
+
+    margin: 15px;
+
+    border-radius: 5px;
+    border: none;
+
+    background: darkslategray;
+    color: white;
+    font-weight: bold;
+    font-size: 14pt;
+}

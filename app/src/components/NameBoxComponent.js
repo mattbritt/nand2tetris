@@ -11,7 +11,7 @@ class NameBoxComponent extends Component {
             <div className='NameBox'>
                 <p>Chip Name: </p> 
                 <input type='text' disabled
-                    placeholder='ALU'></input>
+                    placeholder={this.props.chipName}></input>
                 <div>
                     <p>Time:</p>
                     <input type='text' disabled

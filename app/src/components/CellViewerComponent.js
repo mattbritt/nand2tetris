@@ -20,12 +20,12 @@ class CellViewerComponent extends Component {
                 var dataRow =
                     Object.keys(rowArray).map((key, index2) =>{
                         
-                        if(key == "id")
+                        if(key === "id")
                         {
                             rowId = rowArray[key];
-                            if(rowId == this.props.selectedRowId)
+                            if(rowId === this.props.selectedRowId)
                                 thisClass = "selectedRow";
-                            return;
+                            return null;
                         }
                         return <td className={thisClass} 
                                     key={index2}>{rowArray[key]}</td>});
@@ -48,24 +48,27 @@ class CellViewerComponent extends Component {
             </tr>)
         }
 
+        var titles =  (<tr>
+                        <th>Name</th>
+                        <th>Value</th>
+                       </tr>);
+        if(this.props.data)
+        {
+            titles = (<tr>
+                {this.props.data.columnTitles.map((title, index) => 
+                    {
+                        return (<th key={index}>{title}</th>)
+                    })}
+            </tr>);
+        }
+
+
         return (
             <div className='CellViewerWrapper'>
                 <div className='CellViewer'>
                     <table>
                     <tbody>
-
-                        { this.props.data ? 
-                        ( <tr>
-                                {this.props.data.columnTitles.map((title, index) => {                                   <th key>{title}</th>
-                                   return  (<th key={index}>{title}</th>)})}
-                        </tr>)
-                        :
-                         (   <tr>
-                                <th>Name</th>
-                                <th>Value</th>
-                            </tr>)
-                        }
-                        
+                        {titles}
                         
                         {datum}
 

@@ -27,7 +27,7 @@ class LoadChipModalComponent extends Component {
                         >
                         </CellViewer>
                     </div>
-                    <span>
+                    <span className="loadChipModalButtons">
                         <button onClick={this.props.handleLoad}>Load</button>
                         <button onClick={this.props.handleClose}>Cancel</button>
                     </span>

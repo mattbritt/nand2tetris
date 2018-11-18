@@ -7,9 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import LoginModal from "../containers/LoginModal";
 import LoginButton from '../containers/LoginButton';
-import LoadChipModal from '../containers/LoadChipModal';
-
-
 
 class MenuBarComponent extends Component {
 
@@ -39,9 +36,9 @@ class MenuBarComponent extends Component {
                     </button>                    
                     <div className='dropdown-content'>
                         <a onClick={this.props.handleShowLoadChipModal}>Load Chip</a>
-                        <a href="#">Load script</a>
+                        <a href="">Load script</a>
                         <hr></hr>
-                        <a href="#">Exit</a>
+                        <a href="">Exit</a>
                     </div> 
                 </div> {/* dropdown */}
                 <div className='dropdown'>
@@ -49,15 +46,15 @@ class MenuBarComponent extends Component {
                                 icon='caret-down'/>
                     </button>
                     <div className='dropdown-content'>
-                        <a href="#">Single Step</a>
-                        <a href="#">Run</a>
-                        <a href="#">Stop</a>
-                        <a href="#">Reset</a>
+                        <a href="">Single Step</a>
+                        <a href="">Run</a>
+                        <a href="">Stop</a>
+                        <a href="">Reset</a>
                         <hr></hr>
-                        <a href="#">Eval</a>
-                        <a href="#">Tick Tock</a>
+                        <a href="">Eval</a>
+                        <a href="">Tick Tock</a>
                         <hr></hr>
-                        <a href="#">Breakpoints</a>
+                        <a href="">Breakpoints</a>
                     </div>
 
                 </div> {/* dropdown */}
@@ -67,8 +64,8 @@ class MenuBarComponent extends Component {
                                 icon='caret-down'/>
                     </button>
                     <div className='dropdown-content'>
-                        <a href="#">Usage</a>
-                        <a href="#">About</a>
+                        <a href="">Usage</a>
+                        <a href="">About</a>
                     </div>
                 </div>
 
