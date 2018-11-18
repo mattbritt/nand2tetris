@@ -36,9 +36,7 @@ class MenuBarComponent extends Component {
                     </button>                    
                     <div className='dropdown-content'>
                         <a onClick={this.props.handleShowLoadChipModal}>Load Chip</a>
-                        <a href="">Load script</a>
-                        <hr></hr>
-                        <a href="">Exit</a>
+                        <a onClick={this.props.handleLoadScript}>Load script</a>
                     </div> 
                 </div> {/* dropdown */}
                 <div className='dropdown'>
@@ -46,15 +44,15 @@ class MenuBarComponent extends Component {
                                 icon='caret-down'/>
                     </button>
                     <div className='dropdown-content'>
-                        <a href="">Single Step</a>
-                        <a href="">Run</a>
-                        <a href="">Stop</a>
-                        <a href="">Reset</a>
+                        <a onClick={this.props.handleSingleStep}>Single Step</a>
+                        <a onClick={this.props.handlePlay}>Run</a>
+                        <a onClick={this.props.handleStop}>Stop</a>
+                        <a onClick={this.props.handleReset}>Reset</a>
                         <hr></hr>
-                        <a href="">Eval</a>
-                        <a href="">Tick Tock</a>
+                        <a onClick={this.props.handleEval}>Eval</a>
+                        <a onClick={this.props.handleTickTock}>Tick Tock</a>
                         <hr></hr>
-                        <a href="">Breakpoints</a>
+                        <a onClick={this.props.handleBreakpoints}>Breakpoints</a>
                     </div>
 
                 </div> {/* dropdown */}
@@ -64,8 +62,8 @@ class MenuBarComponent extends Component {
                                 icon='caret-down'/>
                     </button>
                     <div className='dropdown-content'>
-                        <a href="">Usage</a>
-                        <a href="">About</a>
+                        <a>Usage</a>
+                        <a>About</a>
                     </div>
                 </div>
 

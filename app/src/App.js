@@ -49,6 +49,14 @@ class App extends Component {
       this.handleLogin = this.handleLogin.bind(this);
       this.handleLogout = this.handleLogout.bind(this);
       this.handleLoadChip = this.handleLoadChip.bind(this);
+      this.handleSingleStep = this.handleSingleStep.bind(this);
+      this.handlePlay = this.handlePlay.bind(this);
+      this.handleStop = this.handleStop.bind(this);
+      this.handleReset = this.handleReset.bind(this);
+      this.handleEval = this.handleEval.bind(this);
+      this.handleTickTock = this.handleTickTock.bind(this);
+      this.handleLoadScript = this.handleLoadScript.bind(this);
+      this.handleBreakpoints = this.handleBreakpoints.bind(this);
     
     }
 
@@ -90,6 +98,40 @@ class App extends Component {
               this.loadChips(userId);
             })
       }
+    }
+
+
+
+    handleSingleStep(){
+      // console.log("single step")
+    }
+
+    handlePlay(){
+      // console.log("play")
+    }
+
+    handleStop(){
+      // console.log("stop")
+    }
+
+    handleReset(){
+      // console.log("reset")
+    }
+
+    handleEval(){
+      // console.log("eval")
+    }
+
+    handleTickTock(){
+      // console.log("tick/tock")
+    }
+
+    handleLoadScript(){
+      // console.log("load script")
+    }
+
+    handleBreakpoints(){
+      // console.log("breakpoints")
     }
   
   loadChips(userId)
@@ -140,9 +182,26 @@ class App extends Component {
           userInfo={this.state.user}
           handleLogout={this.handleLogout}
           handleShowLoadChipModal={this.showLoadChipModal}
+
+          handleSingleStep={this.handleSingleStep}
+          handlePlay={this.handlePlay}
+          handleStop={this.handleStop}
+          handleReset={this.handleReset}
+          handleEval={this.handleEval}
+          handleTickTock={this.handleTickTock}
+          handleLoadScript={this.handleLoadScript}
+          handleBreakpoints={this.handleBreakpoints}
         ></MenuBar>
         <ToolBar
           handleShowLoadChipModal={this.showLoadChipModal}
+          handleSingleStep={this.handleSingleStep}
+          handlePlay={this.handlePlay}
+          handleStop={this.handleStop}
+          handleReset={this.handleReset}
+          handleEval={this.handleEval}
+          handleTickTock={this.handleTickTock}
+          handleLoadScript={this.handleLoadScript}
+          handleBreakpoints={this.handleBreakpoints}
         ></ToolBar>
       </div>
   

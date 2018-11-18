@@ -11,6 +11,14 @@ class ToolBar extends Component {
         return (
             <ToolBarComponent
                 handleShowLoadChipModal={this.props.handleShowLoadChipModal}
+                handleSingleStep={this.props.handleSingleStep}
+                handlePlay={this.props.handlePlay}
+                handleStop={this.props.handleStop}
+                handleReset={this.props.handleReset}
+                handleEval={this.props.handleEval}
+                handleTickTock={this.props.handleTickTock}
+                handleLoadScript={this.props.handleLoadScript}
+                handleBreakpoints={this.props.handleBreakpoints}
             ></ToolBarComponent>
         )
     }

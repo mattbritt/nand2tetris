@@ -20,46 +20,46 @@ class ToolBarComponent extends Component {
                             icon='microchip' />
                             <span className='tooltiptext'>Load Chip</span>
                     </a>
-                    <a href="" className='tooltip'>
+                    <a onClick={this.props.handleSingleStep} className='tooltip'>
                         <FontAwesomeIcon
                             icon='step-forward' />
                             <span className='tooltiptext'>Single Step</span>
                     </a>
-                    <a href="" className='tooltip'>
+                    <a onClick={this.props.handlePlay} className='tooltip'>
                         <FontAwesomeIcon
                             icon='play' />
                             <span className='tooltiptext'>Play</span>
                     </a>
-                    <a href="" className='tooltip'>
+                    <a onClick={this.props.handleStop} className='tooltip'>
                         <FontAwesomeIcon
                             icon='stop' />
                             <span className='tooltiptext'>Stop</span>
                     </a>
-                    <a href="" className='tooltip'>
+                    <a onClick={this.props.handleReset} className='tooltip'>
                         <FontAwesomeIcon
                             icon='backward' />
                             <span className='tooltiptext'>Reset</span>
                     </a>
                 </div>
                 <div className='toolBarDivider'>
-                    <a href="" className='tooltip'>
+                    <a onClick={this.props.handleEval} className='tooltip'>
                         <FontAwesomeIcon
                             icon='calculator' />
                             <span className='tooltiptext'>Eval</span>
                     </a>
-                    <a href="" className='tooltip'>
+                    <a onClick={this.props.handleTickTock} className='tooltip'>
                         <FontAwesomeIcon
                             icon='clock' />
                             <span className='tooltiptext'>Tick / Tock</span>
                     </a>
                 </div>
                 <div className="toolBarDivider">
-                    <a href="" className='tooltip'>
+                    <a onClick={this.props.handleLoadScript} className='tooltip'>
                         <FontAwesomeIcon
                             icon='scroll' />
                             <span className='tooltiptext'>Load Test Script</span>
                     </a>
-                    <a href="" className='tooltip'>
+                    <a onClick={this.props.handleBreakpoints} className='tooltip'>
                         <FontAwesomeIcon
                             icon='flag' />
                             <span className='tooltiptext'>Breakpoints</span>
