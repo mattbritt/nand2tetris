@@ -23,6 +23,7 @@ class MenuBar extends Component {
                 handleTickTock={this.props.handleTickTock}
                 handleLoadScript={this.props.handleLoadScript}
                 handleBreakpoints={this.props.handleBreakpoints}
+                showAboutModal={this.props.showAboutModal}
                 >
             </MenuBarComponent>
         );

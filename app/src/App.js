@@ -16,6 +16,8 @@ import LoadChipModal from './containers/LoadChipModal';
 import CellViewer from "./containers/CellViewer";
 import CellViewerWithTitle from "./containers/CellViewerWithTitle";
 
+import AboutModal from './containers/AboutModal';
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faUser, faMicrochip, faPlay, faStop,
@@ -41,9 +43,10 @@ class App extends Component {
       this.state = {
         user:  {},
         showLoadChipModal: false,
+        showAboutModal: false,
         chips: [],
         loggedIn: false,
-        chipName: "User Not Logged In"
+        chipName: ""
       };
       
       this.handleLogin = this.handleLogin.bind(this);
@@ -95,6 +98,16 @@ class App extends Component {
     hideLoadChipModal = () =>
     {
         this.setState({showLoadChipModal: false});
+    }
+
+    showAboutModal = () =>
+    {
+      this.setState({showAboutModal: true});
+    }
+
+    hideAboutModal = () =>
+    {
+      this.setState({showAboutModal: false});
     }
 
     handleLogout()
@@ -216,6 +229,7 @@ class App extends Component {
           handleTickTock={this.handleTickTock}
           handleLoadScript={this.handleLoadScript}
           handleBreakpoints={this.handleBreakpoints}
+          showAboutModal={this.showAboutModal}
         ></MenuBar>
         <ToolBar
           handleShowLoadChipModal={this.showLoadChipModal}
@@ -266,6 +280,12 @@ class App extends Component {
         chips={this.state.chips}
         loggedIn={this.state.loggedIn}
       ></LoadChipModal>
+
+      <AboutModal
+        show={this.state.showAboutModal}
+        handleClose={this.hideAboutModal}
+        ></AboutModal>
+
 
      </div>
     );
