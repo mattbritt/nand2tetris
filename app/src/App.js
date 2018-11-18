@@ -58,7 +58,26 @@ class App extends Component {
       this.handleLoadScript = this.handleLoadScript.bind(this);
       this.handleBreakpoints = this.handleBreakpoints.bind(this);
       this.handleAnimationSpeedChange = this.handleAnimationSpeedChange.bind(this);
-    
+      this.handleAnimateTypeChange = this.handleAnimateTypeChange.bind(this);
+      this.handleViewChange = this.handleViewChange.bind(this);
+      this.handleFormatChange = this.handleFormatChange.bind(this);
+
+    }
+
+    handleViewChange(value){
+      // console.log("handleViewChange")
+      // console.log(value);
+    }
+
+    handleFormatChange(value){
+      // console.log("handleFormatChange")
+      // console.log(value)
+    }
+
+    handleAnimateTypeChange(value)
+    {
+      // console.log("handleAnimateTypeChange")
+      // console.log(value)
     }
 
     handleLoadChip(chipId)
@@ -209,6 +228,9 @@ class App extends Component {
           handleLoadScript={this.handleLoadScript}
           handleBreakpoints={this.handleBreakpoints}
           handleAnimationSpeedChange={this.handleAnimationSpeedChange}
+          handleAnimateTypeChange={this.handleAnimateTypeChange}
+          handleFormatChange={this.handleFormatChange}
+          handleViewChange={this.handleViewChange}
         ></ToolBar>
       </div>
   

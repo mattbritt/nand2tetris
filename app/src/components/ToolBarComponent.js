@@ -9,6 +9,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Slider from  '../containers/Slider.js'
 
 class ToolBarComponent extends Component {
+
+    constructor(props){
+        super(props);
+
+        this.handleAnimateTypeChange = this.handleAnimateTypeChange.bind(this);
+        this.handleFormatChange = this.handleFormatChange.bind(this);
+        this.handleViewChange = this.handleViewChange.bind(this);
+    }
+
+    handleViewChange(event){
+        this.props.handleViewChange(event.target.value);
+    }
+
+    handleFormatChange(event){
+        this.props.handleFormatChange(event.target.value);
+    }
+
+    handleAnimateTypeChange(event){
+        this.props.handleAnimateTypeChange(event.target.value);
+    }
+
     render (){
         return (
             <div className="toolBar">
@@ -76,7 +97,9 @@ class ToolBarComponent extends Component {
                 
                 <div style={{float: 'right'}}>
                     <div className='tooltip'>
-                        <select name='animation' className='tooltip'>
+                        <select
+                            onChange={this.handleAnimateTypeChange} 
+                            name='animation' className='tooltip'>
                             <option value='program'>Program Flow</option>
                             <option value='programData'>Program and Data Flow</option>
                             <option value='noAnimation'>No Animation</option>
@@ -85,7 +108,9 @@ class ToolBarComponent extends Component {
                     </div>
                     
                     <div className='tooltip'>    
-                        <select name='format'>
+                        <select name='format'
+                                onChange={this.handleFormatChange}
+                            >
                             <option value='decimal'>Decimal</option>
                             <option value='hexa'>Hexadecimal</option>
                             <option value='binary'>Binary</option>
@@ -94,7 +119,9 @@ class ToolBarComponent extends Component {
                     </div>
                     
                     <div className='tooltip'>
-                        <select name='view'>
+                        <select name='view'
+                            onChange={this.handleViewChange}
+                        >
                             <option value='script'>Script</option>
                             <option value='output'>Output</option>
                             <option value='compare'>Compare</option>

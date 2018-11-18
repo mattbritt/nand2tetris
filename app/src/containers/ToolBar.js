@@ -20,6 +20,9 @@ class ToolBar extends Component {
                 handleLoadScript={this.props.handleLoadScript}
                 handleBreakpoints={this.props.handleBreakpoints}
                 handleAnimationSpeedChange={this.props.handleAnimationSpeedChange}
+                handleAnimateTypeChange={this.props.handleAnimateTypeChange}
+                handleFormatChange={this.props.handleFormatChange}
+                handleViewChange={this.props.handleViewChange}
             ></ToolBarComponent>
         )
     }
