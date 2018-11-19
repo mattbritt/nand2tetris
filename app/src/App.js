@@ -46,7 +46,8 @@ class App extends Component {
         showAboutModal: false,
         chips: [],
         loggedIn: false,
-        chipName: ""
+        chipName: "",
+        hdlObj: { columnTitles: [], rowArray: []}
       };
       
       this.handleLogin = this.handleLogin.bind(this);
@@ -70,8 +71,62 @@ class App extends Component {
     handleChipFileLoad = (newFile) => {
       var reader = new FileReader();
       reader.onload = (file) => {
-        console.log(file.target.result)
-      }
+
+        var hdlObj = { columnTitles: [],
+                        dataArray: [] }
+
+        var chipName = "";
+
+        var inputObj = { 
+                        columnTitles: [ "Name", "Value"],
+                        dataArray: []  
+                      }
+
+        // parse inputs
+        var inputsRegex = new RegExp(/(?<=IN)[\s\S]*?(?=;)/);
+        var inputs = inputsRegex.exec(file.target.result)
+        if(inputs)
+        {
+          inputs = inputs[0].trim().split(/,?\s+/ );
+          if(inputs)
+          {
+            inputs.forEach((inputPin, index)=> {
+              inputObj.dataArray.push({id: index, pin: inputPin, value: 0})
+            });
+          }
+        }
+        else{
+          console.log("inputs was null from regex")
+        }
+
+
+        // parse file line by line
+        var fileLines = file.target.result.split(/\r\n|\n/)
+        fileLines.forEach((line, index)=>
+        {
+          hdlObj.dataArray.push({id: index, thisLine: line});
+          
+          // look for chipName
+          if(chipName === "")
+          {  
+            var wordArray = line.trim().split(/,?\s+/ ) ;
+            // console.log(wordArray)
+            if(wordArray[0] === 'CHIP')
+              chipName = wordArray[1];
+          }
+        })
+
+        this.setState({
+                        hdlObj: hdlObj,
+                        inputObj: inputObj,
+                        chipName: chipName,
+                        showLoadChipModal: false
+                      })
+
+
+      } // end reader.onload
+
+
 
       reader.readAsText(newFile)
 
@@ -265,11 +320,15 @@ class App extends Component {
             <NameBox className='NameBox'
                 chipName={this.state.chipName}
               ></NameBox>
-            <CellViewerWithTitle title="Input Pins"></CellViewerWithTitle>
+            <CellViewerWithTitle title="Input Pins"
+              data={this.state.inputObj}
+            ></CellViewerWithTitle>
 
             <CellViewerWithTitle title="Output Pins"></CellViewerWithTitle>
 
-            <CellViewerWithTitle title="HDL"></CellViewerWithTitle>
+            <CellViewerWithTitle title="HDL"
+              data={this.state.hdlObj}
+            ></CellViewerWithTitle>
 
             <CellViewerWithTitle title="Internal Pins"></CellViewerWithTitle>
 

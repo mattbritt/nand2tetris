@@ -8,7 +8,10 @@ import CellViewerWithTitleComponent from '../components/CellViewerWithTitleCompo
 class CellViewerWithTitle extends Component {
     render() {
         return (
-            <CellViewerWithTitleComponent title={this.props.title}><h1>test</h1></CellViewerWithTitleComponent>
+            <CellViewerWithTitleComponent 
+                title={this.props.title}
+                data={this.props.data}
+            ><h1>test</h1></CellViewerWithTitleComponent>
         )
     }
 }

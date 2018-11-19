@@ -11,8 +11,9 @@ class CellViewerComponent extends Component {
 
         var datum;
 
-        if(this.props.data)
+        if(this.props.data && this.props.data.dataArray)
         {
+
             datum = this.props.data.dataArray.map((rowArray, index) =>
             {
                 var thisClass = "";

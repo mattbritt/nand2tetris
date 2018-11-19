@@ -15,7 +15,9 @@ class CellViewerWithTitleComponent extends Component {
                 <span>
                     <p>{this.props.title}</p>
                 </span>
-                <CellViewer></CellViewer>
+                <CellViewer
+                    data={this.props.data}
+                ></CellViewer>
             </div>
         )
     }
