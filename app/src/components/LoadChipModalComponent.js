@@ -8,10 +8,14 @@ import './css/LoadChipModalComponent.css';
 import CellViewer from '../containers/CellViewer';
 
 class LoadChipModalComponent extends Component {
+
+    handleFileChange = (event) => {
+        this.props.handleChipFileLoad(event.target.files[0])
+    }
+
     render(){
 
         const showHideClassname = this.props.show ? "modal display-block" : "modal display-none";
-
 
         return (
             <div className={showHideClassname} >
@@ -27,9 +31,22 @@ class LoadChipModalComponent extends Component {
                         >
                         </CellViewer>
                     </div>
-                    <span className="loadChipModalButtons">
-                        <button onClick={this.props.handleLoad}>Load</button>
-                        <button onClick={this.props.handleClose}>Cancel</button>
+                    <span className="loadChipModalButtonsSpan">
+                        <label htmlFor="chip-upload" className="file-upload-button">
+                            Browse
+                        </label>
+                        <input id="chip-upload" type="file" hidden
+                        accept=".hdl"
+                            onChange={this.handleFileChange}/>
+                        
+                        <button 
+                            onClick={this.props.handleLoad}
+                            className="loadChipModalButton"
+                            >Load</button>
+                        <button 
+                            onClick={this.props.handleClose}
+                            className="loadChipModalButton"
+                            >Cancel</button>
                     </span>
                 </section>
 

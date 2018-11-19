@@ -68,6 +68,7 @@ class LoadChipModal extends Component {
                 handleChipSelect={this.handleChipSelect}
                 selectedChip={this.state.selectedChip}
                 data={this.state.chips}
+                handleChipFileLoad={this.props.handleChipFileLoad}
             ></LoadChipModalComponent>
         )
     }

@@ -67,6 +67,17 @@ class App extends Component {
 
     }
 
+    handleChipFileLoad = (newFile) => {
+      var reader = new FileReader();
+      reader.onload = (file) => {
+        console.log(file.target.result)
+      }
+
+      reader.readAsText(newFile)
+
+    }
+
+
     handleViewChange(value){
       // console.log("handleViewChange")
       // console.log(value);
@@ -279,6 +290,7 @@ class App extends Component {
         handleLoad={this.handleLoadChip}
         chips={this.state.chips}
         loggedIn={this.state.loggedIn}
+        handleChipFileLoad={this.handleChipFileLoad}
       ></LoadChipModal>
 
       <AboutModal

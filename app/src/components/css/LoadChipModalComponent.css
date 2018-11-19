@@ -8,12 +8,12 @@
     padding: 10px;
 }
 
-.loadChipModalButtons {
+.loadChipModalButtonsSpan {
     display: flex;
     flex-direction: row;
 
 }
-.loadChipModalButtons > button {
+.loadChipModalButton{
     width: 150px;
     height: 45px;
 
@@ -21,6 +21,25 @@
 
     border-radius: 5px;
     border: none;
+
+    background: darkslategray;
+    color: white;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.file-upload-button {
+    width: 150px;
+    height: 45px;
+    line-height: 45px;
+    margin: 15px;
+    
+
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+  
+
 
     background: darkslategray;
     color: white;
