@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
+
 import './App.css';
 
 import backendSettings from './backendSettings.json';
+//import strip from 'strip-comments';
 
 import MenuBar from "./containers/MenuBar";
 import ToolBar from "./containers/ToolBar";
@@ -81,10 +82,25 @@ class App extends Component {
                         columnTitles: [ "Name", "Value"],
                         dataArray: []  
                       }
+        var outputObj = { 
+          columnTitles: [ "Name", "Value"],
+          dataArray: []  
+        }
+        var internalObj = { 
+          columnTitles: [ "Name", "Value"],
+          dataArray: []  
+        }                      
+
+        var currentPins = [];
+
+        //var noComments = file.target.result.replace(/(\/\*[^*]*\*\/)|(\/\/[^*]*)/g, '');
+        var noComments = file.target.result.replace(/\/{2,}.*/g, '');
+        noComments = noComments.replace(/(\/\*+([^/])*\*+\/)/, '');
 
         // parse inputs
         var inputsRegex = new RegExp(/(?<=IN)[\s\S]*?(?=;)/);
-        var inputs = inputsRegex.exec(file.target.result)
+        var inputs = inputsRegex.exec(noComments);
+        
         if(inputs)
         {
           inputs = inputs[0].trim().split(/,?\s+/ );
@@ -92,6 +108,7 @@ class App extends Component {
           {
             inputs.forEach((inputPin, index)=> {
               inputObj.dataArray.push({id: index, pin: inputPin, value: 0})
+              currentPins.push(inputPin);
             });
           }
         }
@@ -99,9 +116,47 @@ class App extends Component {
           console.log("inputs was null from regex")
         }
 
+          var outputsRegex = new RegExp(/(?<=OUT)[\s\S]*?(?=;)/);
+          var outputs = outputsRegex.exec(noComments);
 
+          if(outputs)
+          {
+            outputs = outputs[0].trim().split(/,?\s+/);
+            if(outputs)
+            {
+              outputs.forEach((outputPin, index)=>{
+                outputObj.dataArray.push({id:index, pin: outputPin, value:0})
+                currentPins.push(outputPin);
+              });
+            }
+          }
+
+        // internal pins
+        var internalsRegex = new RegExp(/\([^)]*\)/);
+        var internals = internalsRegex.exec(noComments);
+        //
+        if(internals)
+        {
+            internals.forEach((val)=>{
+              var valArr = val.split(/\W/);
+            
+              valArr.forEach((element, index)=>{
+                if(
+                  currentPins.includes(element) || element === "")
+                {
+
+                }
+                else
+                {
+                  internalObj.dataArray.push({id: index, pin: element, value:0});
+                }
+              })
+            })
+            
+        }
         // parse file line by line
-        var fileLines = file.target.result.split(/\r\n|\n/)
+        //var fileLines = file.target.result.split(/\r\n|\n/)
+        var fileLines = noComments.split(/\r\n|\n/);
         fileLines.forEach((line, index)=>
         {
           hdlObj.dataArray.push({id: index, thisLine: line});
@@ -119,6 +174,8 @@ class App extends Component {
         this.setState({
                         hdlObj: hdlObj,
                         inputObj: inputObj,
+                        outputObj: outputObj,
+                        internalObj: internalObj,
                         chipName: chipName,
                         showLoadChipModal: false
                       })
@@ -324,13 +381,17 @@ class App extends Component {
               data={this.state.inputObj}
             ></CellViewerWithTitle>
 
-            <CellViewerWithTitle title="Output Pins"></CellViewerWithTitle>
+            <CellViewerWithTitle title="Output Pins"
+              data={this.state.outputObj}
+            ></CellViewerWithTitle>
 
             <CellViewerWithTitle title="HDL"
               data={this.state.hdlObj}
             ></CellViewerWithTitle>
 
-            <CellViewerWithTitle title="Internal Pins"></CellViewerWithTitle>
+            <CellViewerWithTitle title="Internal Pins"
+              data={this.state.internalObj}
+            ></CellViewerWithTitle>
 
           </div>
         </div>
