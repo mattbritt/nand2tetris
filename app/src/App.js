@@ -12,6 +12,7 @@ import NameBox from "./containers/NameBox";
 
 import StatusBar from "./containers/StatusBar";
 
+import LoadScriptModal from './containers/LoadScriptModal';
 import LoadChipModal from './containers/LoadChipModal';
 
 import CellViewer from "./containers/CellViewer";
@@ -45,10 +46,11 @@ class App extends Component {
         user:  {},
         showLoadChipModal: false,
         showAboutModal: false,
+        showLoadScriptModal: false,
         chips: [],
+        scripts: [],
         loggedIn: false,
-        chipName: "",
-        hdlObj: { columnTitles: [], rowArray: []}
+        chipName: ""
       };
       
       this.handleLogin = this.handleLogin.bind(this);
@@ -156,7 +158,7 @@ class App extends Component {
         }
         // parse file line by line
         //var fileLines = file.target.result.split(/\r\n|\n/)
-        var fileLines = noComments.split(/\r\n|\n/);
+        var fileLines = file.target.result.split(/\r\n|\n/);
         fileLines.forEach((line, index)=>
         {
           hdlObj.dataArray.push({id: index, thisLine: line});
@@ -184,10 +186,31 @@ class App extends Component {
       } // end reader.onload
 
 
-
       reader.readAsText(newFile)
 
     }
+
+  handleScriptFileLoad = (newFile) => {
+    var reader = new FileReader();
+    reader.onload = (file) => {
+      var scriptObj = {
+        columnTitles: [],
+        dataArray: []
+      }
+
+      var fileLines = file.target.result.split(/\r\n|\n/);
+      fileLines.forEach((line, index) => {
+        scriptObj.dataArray.push({ id: index, thisLine: line });
+
+      })
+
+
+      this.setState({ scriptObj: scriptObj,
+                       showLoadScriptModal: false});
+    }
+
+    reader.readAsText(newFile);
+  }
 
 
     handleViewChange(value){
@@ -212,16 +235,30 @@ class App extends Component {
       console.log(chipId)
     }
 
+    showLoadScriptModal = () =>
+    {
+      if(this.state.loggedIn)
+        this.setState({showLoadScriptModal: true});
+    }
+
+
     showLoadChipModal = () =>
     {
       if(this.state.loggedIn)
         this.setState({showLoadChipModal: true});
     }
 
+    hideLoadScriptModal = () =>
+    {
+      this.setState({showLoadScriptModal: false});
+    }
+
     hideLoadChipModal = () =>
     {
         this.setState({showLoadChipModal: false});
     }
+
+
 
     showAboutModal = () =>
     {
@@ -283,7 +320,8 @@ class App extends Component {
     }
 
     handleLoadScript(){
-      // console.log("load script")
+      if(this.state.loggedIn)
+        this.setState({showLoadScriptModal: true})
     }
 
     handleBreakpoints(){
@@ -396,13 +434,24 @@ class App extends Component {
           </div>
         </div>
         <div className='halfDiv'>
-          <CellViewer></CellViewer>
+          <CellViewer
+            data={this.state.scriptObj}         
+          ></CellViewer>
         </div>
 
 
       <div id='footerDiv'>
         <StatusBar></StatusBar>
       </div>
+
+      <LoadScriptModal
+        show={this.state.showLoadScriptModal}
+        handleClose={this.hideLoadScriptModal}
+        handleLoad={this.handleLoadScript}
+        scripts={this.state.scripts}
+        loggedIn={this.state.loggedIn}
+        handleScriptFileLoad={this.handleScriptFileLoad}
+      ></LoadScriptModal>
 
       <LoadChipModal 
         show={this.state.showLoadChipModal}

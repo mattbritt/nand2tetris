@@ -36,7 +36,7 @@ class MenuBarComponent extends Component {
                     </button>                    
                     <div className='dropdown-content'>
                         <a onClick={this.props.handleShowLoadChipModal}>Load Chip</a>
-                        <a onClick={this.props.handleLoadScript}>Load script</a>
+                        <a onClick={this.props.handleLoadScript}>Load Script</a>
                     </div> 
                 </div> {/* dropdown */}
                 <div className='dropdown'>
