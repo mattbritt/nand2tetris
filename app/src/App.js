@@ -182,6 +182,26 @@ class App extends Component {
 
         this.parseChip(file.target.result)
 
+        // upload chip file
+        var chipObj = {};
+        chipObj.uid = this.state.userId;
+        chipObj.filename = newFile.name;
+        chipObj.text = file.target.result;
+
+        // var chipUploadUrl = backendSettings.url;
+        // url += '/chips';
+var chipUploadUrl = 'http://requestbin.fullcontact.com/19tqko11';  
+console.log(chipObj);
+
+        fetch(chipUploadUrl,
+            {
+              method: 'post',
+              mode: 'no-cors',
+              body: JSON.stringify(chipObj)
+            }
+          );
+
+
       } // end reader.onload
 
       
@@ -195,20 +215,26 @@ class App extends Component {
     reader.onload = (file) => {
 
       this.parseScript(file.target.result);
-/*
+      console.log("file");
+      console.log(newFile.name);
+
       // upload script file
       var scriptObj = {};
+      scriptObj.uid = this.state.userId;
+      scriptObj.filename = newFile.name;
       scriptObj.text = file.target.result;
 
-      var scriptUploadUrl = backendSettings.url;
-      url += '/scripts';
+      // var scriptUploadUrl = backendSettings.url;
+      // url += '/scripts';
+var scriptUploadUrl = 'http://requestbin.fullcontact.com/19tqko11';
 
       fetch(scriptUploadUrl, 
           {
             method: 'post',
+            mode: 'no-cors',
             body: JSON.stringify(scriptObj)
           });
-*/
+
     }
 
     reader.readAsText(newFile);
@@ -309,7 +335,7 @@ class App extends Component {
               return response.json();
             })
             .then((userJson)=>{
-              this.setState({user: userJson[0], loggedIn: true})
+              this.setState({user: userJson[0], loggedIn: true, userId: userId })
               this.loadChips(userId);
               this.loadScripts(userId);
             })
