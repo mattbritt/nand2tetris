@@ -62,6 +62,7 @@ class App extends Component {
         scripts: [],
         loggedIn: false,
         chipName: "",
+        isTimerGoing: false
       };
       
       this.handleLogin = this.handleLogin.bind(this);
@@ -79,6 +80,21 @@ class App extends Component {
       this.handleAnimateTypeChange = this.handleAnimateTypeChange.bind(this);
       this.handleViewChange = this.handleViewChange.bind(this);
       this.handleFormatChange = this.handleFormatChange.bind(this);
+
+    }
+
+
+    startTimer = () =>
+    {
+      if(this.state.isTimerGoing)
+        return;
+
+        this.setState({ isTimerGoing: true });
+
+        this.timer = setInterval(() =>
+        {
+          console.log("time");
+        }, 1000)
 
     }
 
@@ -342,15 +358,20 @@ var scriptUploadUrl = 'https://postb.in/6lAKysLW';
 
 
     handleSingleStep(){
-      // console.log("single step")
+      console.log("single step")
     }
 
     handlePlay(){
-      // console.log("play")
+      if(!this.state.chipStr || !this.state.scriptStr)
+        return;
+
+      this.startTimer();
     }
 
     handleStop(){
       // console.log("stop")
+      clearInterval(this.timer)
+      this.setState({ isTimerGoing: false });
     }
 
     handleReset(){
