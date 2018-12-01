@@ -71,116 +71,225 @@ class App extends Component {
 
     }
 
+
+  parseChip = (chipStr) => {
+
+    var hdlObj = {
+      columnTitles: [],
+      dataArray: []
+    }
+
+    var chipName = "";
+
+    var inputObj = {
+      columnTitles: ["Name", "Value"],
+      dataArray: []
+    }
+    var outputObj = {
+      columnTitles: ["Name", "Value"],
+      dataArray: []
+    }
+    var internalObj = {
+      columnTitles: ["Name", "Value"],
+      dataArray: []
+    }
+
+    var currentPins = [
+      'Nand',
+      'Or',
+      'And'
+    ];
+
+    //var noComments = file.target.result.replace(/(\/\*[^*]*\*\/)|(\/\/[^*]*)/g, '');
+    var noComments = chipStr.replace(/\/{2,}.*/g, '');
+    noComments = noComments.replace(/(\/\*+([^/])*\*+\/)/, '');
+
+    // parse inputs
+    var inputsRegex = new RegExp(/(?<=IN)[\s\S]*?(?=;)/);
+    var inputs = inputsRegex.exec(noComments);
+
+    if (inputs) {
+      inputs = inputs[0].trim().split(/,?\s+/);
+      if (inputs) {
+        inputs.forEach((inputPin, index) => {
+          inputObj.dataArray.push({ id: index, pin: inputPin, value: 0 })
+          currentPins.push(inputPin);
+        });
+      }
+    }
+    else {
+      console.log("inputs was null from regex")
+    }
+
+    var outputsRegex = new RegExp(/(?<=OUT)[\s\S]*?(?=;)/);
+    var outputs = outputsRegex.exec(noComments);
+
+    if (outputs) {
+      outputs = outputs[0].trim().split(/,?\s+/);
+      if (outputs) {
+        outputs.forEach((outputPin, index) => {
+          outputObj.dataArray.push({ id: index, pin: outputPin, value: 0 })
+          currentPins.push(outputPin);
+        });
+      }
+    }
+
+    var internalsRegex = new RegExp(/(?<==)[a-zA-Z0-9\[\]]+/g);
+    var internals = noComments.match(internalsRegex)//internalsRegex.exec(noComments);
+    console.log(internals)
+
+
+    // parse file line by line
+    //var fileLines = file.target.result.split(/\r\n|\n/)
+    var fileLines = chipStr.split(/\r\n|\n/);
+    fileLines.forEach((line, index) => {
+      hdlObj.dataArray.push({ id: index, thisLine: line });
+
+      // look for chipName
+      if (chipName === "") {
+        var wordArray = line.trim().split(/,?\s+/);
+        // console.log(wordArray)
+        if (wordArray[0] === 'CHIP')
+          chipName = wordArray[1];
+      }
+    })
+
+    this.setState({
+      hdlObj: hdlObj,
+      inputObj: inputObj,
+      outputObj: outputObj,
+      internalObj: internalObj,
+      chipName: chipName,
+      showLoadChipModal: false
+    })
+  } // end parseChip
+
+
     handleChipFileLoad = (newFile) => {
       var reader = new FileReader();
       reader.onload = (file) => {
 
-        var hdlObj = { columnTitles: [],
-                        dataArray: [] }
+        this.parseChip(file.target.result)
 
-        var chipName = "";
+        // var hdlObj = { columnTitles: [],
+        //                 dataArray: [] }
 
-        var inputObj = { 
-                        columnTitles: [ "Name", "Value"],
-                        dataArray: []  
-                      }
-        var outputObj = { 
-          columnTitles: [ "Name", "Value"],
-          dataArray: []  
-        }
-        var internalObj = { 
-          columnTitles: [ "Name", "Value"],
-          dataArray: []  
-        }                      
+        // var chipName = "";
 
-        var currentPins = [];
+        // var inputObj = { 
+        //                 columnTitles: [ "Name", "Value"],
+        //                 dataArray: []  
+        //               }
+        // var outputObj = { 
+        //   columnTitles: [ "Name", "Value"],
+        //   dataArray: []  
+        // }
+        // var internalObj = { 
+        //   columnTitles: [ "Name", "Value"],
+        //   dataArray: []  
+        // }                      
 
-        //var noComments = file.target.result.replace(/(\/\*[^*]*\*\/)|(\/\/[^*]*)/g, '');
-        var noComments = file.target.result.replace(/\/{2,}.*/g, '');
-        noComments = noComments.replace(/(\/\*+([^/])*\*+\/)/, '');
+        // var currentPins = [
+        //                     'Nand',
+        //                     'Or',
+        //                     'And'
+        //                     ];
 
-        // parse inputs
-        var inputsRegex = new RegExp(/(?<=IN)[\s\S]*?(?=;)/);
-        var inputs = inputsRegex.exec(noComments);
+        // //var noComments = file.target.result.replace(/(\/\*[^*]*\*\/)|(\/\/[^*]*)/g, '');
+        // var noComments = file.target.result.replace(/\/{2,}.*/g, '');
+        // noComments = noComments.replace(/(\/\*+([^/])*\*+\/)/, '');
+
+        // // parse inputs
+        // var inputsRegex = new RegExp(/(?<=IN)[\s\S]*?(?=;)/);
+        // var inputs = inputsRegex.exec(noComments);
         
-        if(inputs)
-        {
-          inputs = inputs[0].trim().split(/,?\s+/ );
-          if(inputs)
-          {
-            inputs.forEach((inputPin, index)=> {
-              inputObj.dataArray.push({id: index, pin: inputPin, value: 0})
-              currentPins.push(inputPin);
-            });
-          }
-        }
-        else{
-          console.log("inputs was null from regex")
-        }
+        // if(inputs)
+        // {
+        //   inputs = inputs[0].trim().split(/,?\s+/ );
+        //   if(inputs)
+        //   {
+        //     inputs.forEach((inputPin, index)=> {
+        //       inputObj.dataArray.push({id: index, pin: inputPin, value: 0})
+        //       currentPins.push(inputPin);
+        //     });
+        //   }
+        // }
+        // else{
+        //   console.log("inputs was null from regex")
+        // }
 
-          var outputsRegex = new RegExp(/(?<=OUT)[\s\S]*?(?=;)/);
-          var outputs = outputsRegex.exec(noComments);
+        //   var outputsRegex = new RegExp(/(?<=OUT)[\s\S]*?(?=;)/);
+        //   var outputs = outputsRegex.exec(noComments);
 
-          if(outputs)
-          {
-            outputs = outputs[0].trim().split(/,?\s+/);
-            if(outputs)
-            {
-              outputs.forEach((outputPin, index)=>{
-                outputObj.dataArray.push({id:index, pin: outputPin, value:0})
-                currentPins.push(outputPin);
-              });
-            }
-          }
+        //   if(outputs)
+        //   {
+        //     outputs = outputs[0].trim().split(/,?\s+/);
+        //     if(outputs)
+        //     {
+        //       outputs.forEach((outputPin, index)=>{
+        //         outputObj.dataArray.push({id:index, pin: outputPin, value:0})
+        //         currentPins.push(outputPin);
+        //       });
+        //     }
+        //   }
 
-        // internal pins
-        var internalsRegex = new RegExp(/\([^)]*\)/);
-        var internals = internalsRegex.exec(noComments);
-        //
-        if(internals)
-        {
-            internals.forEach((val)=>{
-              var valArr = val.split(/\W/);
+        // // internal pins
+        // // var internalsRegex = new RegExp(/\([^)]*\)/);
+        // // var internals = internalsRegex.exec(noComments);
+        // // //
+        // // if(internals)
+        // // {
+        // //     internals.forEach((val)=>{
+        // //       //var valArr = val.split(/\W/);
+        // //       var valArr = noComments.match(/(?<==)[a-zA-Z0-9\[\]]+/)
+        // //       console.log('valArr')
+        // //     console.log(valArr)
+        // //       valArr.forEach((element, index)=>{
+        // //         if(
+        // //           currentPins.includes(element) || element === "")
+        // //         {
+
+        // //         }
+        // //         else
+        // //         {
+        // //           internalObj.dataArray.push({id: index, pin: element, value:0});
+        // //         }
+        // //       })
+        // //     })
             
-              valArr.forEach((element, index)=>{
-                if(
-                  currentPins.includes(element) || element === "")
-                {
+        // // }
 
-                }
-                else
-                {
-                  internalObj.dataArray.push({id: index, pin: element, value:0});
-                }
-              })
-            })
-            
-        }
-        // parse file line by line
-        //var fileLines = file.target.result.split(/\r\n|\n/)
-        var fileLines = file.target.result.split(/\r\n|\n/);
-        fileLines.forEach((line, index)=>
-        {
-          hdlObj.dataArray.push({id: index, thisLine: line});
+
+        // var internalsRegex = new RegExp(/(?<==)[a-zA-Z0-9\[\]]+/g);
+        // var internals = noComments.match(internalsRegex)//internalsRegex.exec(noComments);
+        // console.log(internals)
+
+
+        // // parse file line by line
+        // //var fileLines = file.target.result.split(/\r\n|\n/)
+        // var fileLines = file.target.result.split(/\r\n|\n/);
+        // fileLines.forEach((line, index)=>
+        // {
+        //   hdlObj.dataArray.push({id: index, thisLine: line});
           
-          // look for chipName
-          if(chipName === "")
-          {  
-            var wordArray = line.trim().split(/,?\s+/ ) ;
-            // console.log(wordArray)
-            if(wordArray[0] === 'CHIP')
-              chipName = wordArray[1];
-          }
-        })
+        //   // look for chipName
+        //   if(chipName === "")
+        //   {  
+        //     var wordArray = line.trim().split(/,?\s+/ ) ;
+        //     // console.log(wordArray)
+        //     if(wordArray[0] === 'CHIP')
+        //       chipName = wordArray[1];
+        //   }
+        // })
 
-        this.setState({
-                        hdlObj: hdlObj,
-                        inputObj: inputObj,
-                        outputObj: outputObj,
-                        internalObj: internalObj,
-                        chipName: chipName,
-                        showLoadChipModal: false
-                      })
+        // this.setState({
+        //                 hdlObj: hdlObj,
+        //                 inputObj: inputObj,
+        //                 outputObj: outputObj,
+        //                 internalObj: internalObj,
+        //                 chipName: chipName,
+        //                 showLoadChipModal: false
+        //               })
 
 
       } // end reader.onload
@@ -231,9 +340,33 @@ class App extends Component {
 
     handleLoadChip(chipId)
     {
-      console.log("handleLoadChip")
-      console.log(chipId)
-    }
+
+      if(!chipId || !this.state.chipUrls)
+        return;
+
+      var hdlUrl;
+    
+      this.state.chipUrls.forEach((chip)=>{
+        if(chipId === chip.id)
+        {
+          hdlUrl = chip.url;
+        }
+      });
+  
+    
+////////////////////////////////
+      //hdlUrl = "https://nand2tetrisonline.storage.googleapis.com/And.hdl";
+///////////////////////////
+
+      console.log(hdlUrl);
+      fetch(hdlUrl)
+          .then(response => response.text())
+          .then((data) =>
+          {
+            console.log(data)
+            this.parseChip(data);
+          })
+    } // end handleLoadChip
 
     showLoadScriptModal = () =>
     {
@@ -341,20 +474,47 @@ class App extends Component {
 
 
     var url = backendSettings.backendUrl;
-    url += '/users/' + userId + '/chips';
+    url += '/chips';
 
 
-//     fetch(url)
-//       .then((response) => {
-//         console.log("loadchips B")
+    fetch(url)
+      .then((response) => {
+        console.log("loadchips B")
 
-//         return response.json();
-//       })
-//       .then((chipsJson) => {
-//         console.log("chips Json");
-//         console.log(chipsJson);
-// ///////// Dummy data to get view working //////////
-//         //this.setState({chips: chipsJson});
+        return response.json();
+      })
+      .then((chipsJson) => {
+        console.log("chips Json");
+        console.log(chipsJson);
+
+        var newChips = [];
+        var chipUrls = [];
+        var fileNameRegex = new RegExp(/[^\/]+$/);
+
+        if(chipsJson)
+        {
+          chipsJson.forEach((chip, index)=>
+          {
+            var chipObj = {};
+            chipObj.id = chip.id;
+            chipObj.chipName = chip.name;
+            chipObj.filename = fileNameRegex.exec(chip.hdl_filepath);
+            newChips.push(chipObj)
+
+            var chipUrlObj = {};
+            chipUrlObj.id = chip.id;
+            chipUrlObj.url = chip.hdl_filepath;
+            chipUrls.push(chipUrlObj);
+
+          })
+        }
+
+        this.setState({chips: newChips,
+                        chipUrls: chipUrls });
+      })
+
+///////// Dummy data to get view working //////////
+
 //         var dummyChips = [
 //           { chipName: "And", filename: "and.hdl"},
 //           { chipName: "Or", filename: "or.hdl"},
@@ -362,12 +522,12 @@ class App extends Component {
 //         ];
 //         this.setState({chips: dummyChips})
 //       })
-        var dummyChips = [
-          { id: 1, chipName: "And", filename: "and.hdl"},
-          { id: 2, chipName: "Or", filename: "or.hdl"},
-          { id: 3, chipName: "ALU", filename: "alu.hdl"}
-        ];
-          this.setState({chips: dummyChips})
+        // var dummyChips = [
+        //   { id: 1, chipName: "And", filename: "and.hdl"},
+        //   { id: 2, chipName: "Or", filename: "or.hdl"},
+        //   { id: 3, chipName: "ALU", filename: "alu.hdl"}
+        // ];
+        //   this.setState({chips: dummyChips})
 
 }
 
