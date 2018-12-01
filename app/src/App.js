@@ -61,7 +61,7 @@ class App extends Component {
         chips: [],
         scripts: [],
         loggedIn: false,
-        chipName: ""
+        chipName: "",
       };
       
       this.handleLogin = this.handleLogin.bind(this);
@@ -147,7 +147,6 @@ class App extends Component {
 
     var internalsRegex = new RegExp(/(?<==)[a-zA-Z0-9\[\]]+/g);
     var internals = noComments.match(internalsRegex)//internalsRegex.exec(noComments);
-    console.log(internals)
 
 
     // parse file line by line
@@ -166,6 +165,7 @@ class App extends Component {
     })
 
     this.setState({
+      chipStr: chipStr,
       hdlObj: hdlObj,
       inputObj: inputObj,
       outputObj: outputObj,
@@ -173,6 +173,8 @@ class App extends Component {
       chipName: chipName,
       showLoadChipModal: false
     })
+
+    this.checkForBothChipAndScript();
   } // end parseChip
 
 
@@ -190,8 +192,7 @@ class App extends Component {
 
         // var chipUploadUrl = backendSettings.url;
         // url += '/chips';
-var chipUploadUrl = 'http://requestbin.fullcontact.com/19tqko11';  
-console.log(chipObj);
+var chipUploadUrl = 'https://postb.in/6lAKysLW';  
 
         fetch(chipUploadUrl,
             {
@@ -215,8 +216,6 @@ console.log(chipObj);
     reader.onload = (file) => {
 
       this.parseScript(file.target.result);
-      console.log("file");
-      console.log(newFile.name);
 
       // upload script file
       var scriptObj = {};
@@ -226,7 +225,7 @@ console.log(chipObj);
 
       // var scriptUploadUrl = backendSettings.url;
       // url += '/scripts';
-var scriptUploadUrl = 'http://requestbin.fullcontact.com/19tqko11';
+var scriptUploadUrl = 'https://postb.in/6lAKysLW';
 
       fetch(scriptUploadUrl, 
           {
@@ -273,12 +272,10 @@ var scriptUploadUrl = 'http://requestbin.fullcontact.com/19tqko11';
       });
   
   
-      console.log(hdlUrl);
       fetch(hdlUrl)
           .then(response => response.text())
           .then((data) =>
           {
-            console.log(data)
             this.parseChip(data);
           })
     } // end handleLoadChip
@@ -382,10 +379,48 @@ var scriptUploadUrl = 'http://requestbin.fullcontact.com/19tqko11';
       });
 
 
-      this.setState({ scriptObj: scriptObj,
+      this.setState({ scriptStr: scriptStr,
+                        scriptObj: scriptObj,
                        showLoadScriptModal: false});
+
+       this.checkForBothChipAndScript();
     } // end parseScript
     
+
+    checkForBothChipAndScript = () =>
+    {
+
+      console.log("check both")
+      console.log(this.state)
+      if(!this.state.chipStr || !this.state.scriptStr)
+        return;
+
+      console.log("passed null check")
+
+      // we have both hdl and tst, send to Pat's API
+      var checkObj = {};
+      checkObj.hdl = this.state.chipStr;
+      checkObj.tst = this.state.scriptStr;
+
+      console.log(JSON.stringify(checkObj))
+
+      var url = 'https://postb.in/6lAKysLW';
+
+      fetch(url,
+        {
+          method: 'post',
+          mode: 'no-cors',
+          body: JSON.stringify(checkObj)
+        }).then((response) => response.JSON())
+        .then((checkData) => {
+          console.log('check data')
+          console.log(checkData)
+        }
+        ).catch(err => console.log(err));
+
+
+    }
+
 
     handleLoadScript(scriptId)
     {
@@ -401,13 +436,10 @@ var scriptUploadUrl = 'http://requestbin.fullcontact.com/19tqko11';
           }
         });
 
-        console.log(scriptUrl);
-
         fetch(scriptUrl)
           .then(response => response.text())
           .then((data) =>
           {
-            console.log(data);
             this.parseScript(data);
           });
       
@@ -435,9 +467,6 @@ var scriptUploadUrl = 'http://requestbin.fullcontact.com/19tqko11';
         .then((response) => response.json())
         .then((scriptsData)=>{
 
-            console.log("scripts data")
-            console.log(scriptsData);
-            
             var newScripts = [];
             var scriptUrls = [];
 
@@ -456,8 +485,7 @@ var scriptUploadUrl = 'http://requestbin.fullcontact.com/19tqko11';
                 var scriptUrlObj = {};
                 scriptUrlObj.id = script.id;
                 scriptUrlObj.url = script.filepath;
-                console.log('filepath:')
-                console.log(scriptUrlObj.url)
+
                 scriptUrls.push(scriptUrlObj);
               }) 
             }
@@ -482,13 +510,12 @@ var scriptUploadUrl = 'http://requestbin.fullcontact.com/19tqko11';
 
     fetch(url)
       .then((response) => {
-        console.log("loadchips B")
+
 
         return response.json();
       })
       .then((chipsJson) => {
-        console.log("chips Json");
-        console.log(chipsJson);
+
 
         var newChips = [];
         var chipUrls = [];
