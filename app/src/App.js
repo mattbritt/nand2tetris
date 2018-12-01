@@ -62,7 +62,9 @@ class App extends Component {
         scripts: [],
         loggedIn: false,
         chipName: "",
-        isTimerGoing: false
+        isTimerGoing: false,
+        step: 0,
+        selectedScriptLine: 0
       };
       
       this.handleLogin = this.handleLogin.bind(this);
@@ -94,6 +96,7 @@ class App extends Component {
         this.timer = setInterval(() =>
         {
           console.log("time");
+          this.handleSingleStep();
         }, 1000)
 
     }
@@ -359,6 +362,14 @@ var scriptUploadUrl = 'https://postb.in/6lAKysLW';
 
     handleSingleStep(){
       console.log("single step")
+
+      // while( this.state.step < this.state.scriptLineArray.length
+      //       && )
+
+      var nextLine = this.state.scriptLineArray[this.state.step]
+
+      this.setState({ step: this.state.step + 1 ,
+                      selectedScriptLine: nextLine});
     }
 
     handlePlay(){
@@ -376,6 +387,7 @@ var scriptUploadUrl = 'https://postb.in/6lAKysLW';
 
     handleReset(){
       // console.log("reset")
+      this.setState({ step: 0 });
     }
 
     handleEval(){
@@ -393,6 +405,18 @@ var scriptUploadUrl = 'https://postb.in/6lAKysLW';
         dataArray: []
       }
 
+      var noComments = scriptStr.replace(/\/{2,}.*/g, '');
+      noComments = noComments.replace(/(\/\*+([^/])*\*+\/)/, '');
+
+      var scriptLineArray = [];
+      noComments.split(/\r\n|\n/).forEach((line, index)=>{
+        if(line !== "")
+          scriptLineArray.push(index);
+      })
+
+      console.log('script line array')
+      console.log(scriptLineArray);
+
       var fileLines = scriptStr.split(/\r\n|\n/);
       fileLines.forEach((line, index) => {
         scriptObj.dataArray.push({ id: index, thisLine: line });
@@ -402,7 +426,8 @@ var scriptUploadUrl = 'https://postb.in/6lAKysLW';
 
       this.setState({ scriptStr: scriptStr,
                         scriptObj: scriptObj,
-                       showLoadScriptModal: false});
+                       showLoadScriptModal: false,
+                       scriptLineArray: scriptLineArray });
 
        this.checkForBothChipAndScript();
     } // end parseScript
@@ -630,7 +655,8 @@ var scriptUploadUrl = 'https://postb.in/6lAKysLW';
         </div>
         <div className='halfDiv'>
           <CellViewer
-            data={this.state.scriptObj}         
+            data={this.state.scriptObj}
+            selectedRow={this.state.selectedScriptLine}         
           ></CellViewer>
         </div>
 
