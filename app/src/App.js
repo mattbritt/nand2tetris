@@ -1,3 +1,14 @@
+/*
+    Name: App.js
+    Description:  This module houses the main app logic for the 
+                  online Nand2Tetris Hardware Simulator
+    Author: Matt Britt
+    Project:  CS 467 Capstone Project: Nand2Tetris Hardware Sim
+    Team:  Team Grus
+
+*/
+
+
 import React, { Component } from 'react';
 
 import './App.css';
@@ -171,130 +182,10 @@ class App extends Component {
 
         this.parseChip(file.target.result)
 
-        // var hdlObj = { columnTitles: [],
-        //                 dataArray: [] }
-
-        // var chipName = "";
-
-        // var inputObj = { 
-        //                 columnTitles: [ "Name", "Value"],
-        //                 dataArray: []  
-        //               }
-        // var outputObj = { 
-        //   columnTitles: [ "Name", "Value"],
-        //   dataArray: []  
-        // }
-        // var internalObj = { 
-        //   columnTitles: [ "Name", "Value"],
-        //   dataArray: []  
-        // }                      
-
-        // var currentPins = [
-        //                     'Nand',
-        //                     'Or',
-        //                     'And'
-        //                     ];
-
-        // //var noComments = file.target.result.replace(/(\/\*[^*]*\*\/)|(\/\/[^*]*)/g, '');
-        // var noComments = file.target.result.replace(/\/{2,}.*/g, '');
-        // noComments = noComments.replace(/(\/\*+([^/])*\*+\/)/, '');
-
-        // // parse inputs
-        // var inputsRegex = new RegExp(/(?<=IN)[\s\S]*?(?=;)/);
-        // var inputs = inputsRegex.exec(noComments);
-        
-        // if(inputs)
-        // {
-        //   inputs = inputs[0].trim().split(/,?\s+/ );
-        //   if(inputs)
-        //   {
-        //     inputs.forEach((inputPin, index)=> {
-        //       inputObj.dataArray.push({id: index, pin: inputPin, value: 0})
-        //       currentPins.push(inputPin);
-        //     });
-        //   }
-        // }
-        // else{
-        //   console.log("inputs was null from regex")
-        // }
-
-        //   var outputsRegex = new RegExp(/(?<=OUT)[\s\S]*?(?=;)/);
-        //   var outputs = outputsRegex.exec(noComments);
-
-        //   if(outputs)
-        //   {
-        //     outputs = outputs[0].trim().split(/,?\s+/);
-        //     if(outputs)
-        //     {
-        //       outputs.forEach((outputPin, index)=>{
-        //         outputObj.dataArray.push({id:index, pin: outputPin, value:0})
-        //         currentPins.push(outputPin);
-        //       });
-        //     }
-        //   }
-
-        // // internal pins
-        // // var internalsRegex = new RegExp(/\([^)]*\)/);
-        // // var internals = internalsRegex.exec(noComments);
-        // // //
-        // // if(internals)
-        // // {
-        // //     internals.forEach((val)=>{
-        // //       //var valArr = val.split(/\W/);
-        // //       var valArr = noComments.match(/(?<==)[a-zA-Z0-9\[\]]+/)
-        // //       console.log('valArr')
-        // //     console.log(valArr)
-        // //       valArr.forEach((element, index)=>{
-        // //         if(
-        // //           currentPins.includes(element) || element === "")
-        // //         {
-
-        // //         }
-        // //         else
-        // //         {
-        // //           internalObj.dataArray.push({id: index, pin: element, value:0});
-        // //         }
-        // //       })
-        // //     })
-            
-        // // }
-
-
-        // var internalsRegex = new RegExp(/(?<==)[a-zA-Z0-9\[\]]+/g);
-        // var internals = noComments.match(internalsRegex)//internalsRegex.exec(noComments);
-        // console.log(internals)
-
-
-        // // parse file line by line
-        // //var fileLines = file.target.result.split(/\r\n|\n/)
-        // var fileLines = file.target.result.split(/\r\n|\n/);
-        // fileLines.forEach((line, index)=>
-        // {
-        //   hdlObj.dataArray.push({id: index, thisLine: line});
-          
-        //   // look for chipName
-        //   if(chipName === "")
-        //   {  
-        //     var wordArray = line.trim().split(/,?\s+/ ) ;
-        //     // console.log(wordArray)
-        //     if(wordArray[0] === 'CHIP')
-        //       chipName = wordArray[1];
-        //   }
-        // })
-
-        // this.setState({
-        //                 hdlObj: hdlObj,
-        //                 inputObj: inputObj,
-        //                 outputObj: outputObj,
-        //                 internalObj: internalObj,
-        //                 chipName: chipName,
-        //                 showLoadChipModal: false
-        //               })
-
-
       } // end reader.onload
 
-
+      
+      // actually read the file
       reader.readAsText(newFile)
 
     }
@@ -302,20 +193,22 @@ class App extends Component {
   handleScriptFileLoad = (newFile) => {
     var reader = new FileReader();
     reader.onload = (file) => {
-      var scriptObj = {
-        columnTitles: [],
-        dataArray: []
-      }
 
-      var fileLines = file.target.result.split(/\r\n|\n/);
-      fileLines.forEach((line, index) => {
-        scriptObj.dataArray.push({ id: index, thisLine: line });
+      this.parseScript(file.target.result);
+/*
+      // upload script file
+      var scriptObj = {};
+      scriptObj.text = file.target.result;
 
-      })
+      var scriptUploadUrl = backendSettings.url;
+      url += '/scripts';
 
-
-      this.setState({ scriptObj: scriptObj,
-                       showLoadScriptModal: false});
+      fetch(scriptUploadUrl, 
+          {
+            method: 'post',
+            body: JSON.stringify(scriptObj)
+          });
+*/
     }
 
     reader.readAsText(newFile);
@@ -353,11 +246,7 @@ class App extends Component {
         }
       });
   
-    
-////////////////////////////////
-      //hdlUrl = "https://nand2tetrisonline.storage.googleapis.com/And.hdl";
-///////////////////////////
-
+  
       console.log(hdlUrl);
       fetch(hdlUrl)
           .then(response => response.text())
@@ -422,6 +311,7 @@ class App extends Component {
             .then((userJson)=>{
               this.setState({user: userJson[0], loggedIn: true})
               this.loadChips(userId);
+              this.loadScripts(userId);
             })
       }
     }
@@ -452,10 +342,50 @@ class App extends Component {
       // console.log("tick/tock")
     }
 
-    handleLoadScript(){
-      if(this.state.loggedIn)
-        this.setState({showLoadScriptModal: true})
-    }
+
+    parseScript = (scriptStr) => {
+      var scriptObj = {
+        columnTitles: [],
+        dataArray: []
+      }
+
+      var fileLines = scriptStr.split(/\r\n|\n/);
+      fileLines.forEach((line, index) => {
+        scriptObj.dataArray.push({ id: index, thisLine: line });
+
+      });
+
+
+      this.setState({ scriptObj: scriptObj,
+                       showLoadScriptModal: false});
+    } // end parseScript
+    
+
+    handleLoadScript(scriptId)
+    {
+      if(!scriptId || !this.state.scriptUrls)
+        return;
+      
+        var scriptUrl;
+
+        this.state.scriptUrls.forEach((script)=>{
+          if(scriptId === script.id)
+          {
+            scriptUrl = script.url;
+          }
+        });
+
+        console.log(scriptUrl);
+
+        fetch(scriptUrl)
+          .then(response => response.text())
+          .then((data) =>
+          {
+            console.log(data);
+            this.parseScript(data);
+          });
+      
+    } // end handleLoadScript
 
     handleBreakpoints(){
       // console.log("breakpoints")
@@ -465,6 +395,53 @@ class App extends Component {
       // console.log("handleAnimationSpeedChange")
       // console.log(value)
     }
+
+    loadScripts = (userId) => {
+
+      if(!userId)
+      return;
+
+
+      var url = backendSettings.backendUrl;
+      url += '/scripts';
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((scriptsData)=>{
+
+            console.log("scripts data")
+            console.log(scriptsData);
+            
+            var newScripts = [];
+            var scriptUrls = [];
+
+            var fileNameRegex = new RegExp(/[^\/]+$/);
+
+            if(scriptsData)
+            {
+              scriptsData.forEach((script) =>
+              {
+                var scriptObj = {};
+                scriptObj.id = script.id;
+                scriptObj.scriptName = script.name;
+                scriptObj.filename = fileNameRegex.exec(script.filepath);
+                newScripts.push(scriptObj);
+
+                var scriptUrlObj = {};
+                scriptUrlObj.id = script.id;
+                scriptUrlObj.url = script.filepath;
+                console.log('filepath:')
+                console.log(scriptUrlObj.url)
+                scriptUrls.push(scriptUrlObj);
+              }) 
+            }
+            this.setState({ scripts: newScripts,
+                              scriptUrls: scriptUrls });
+        })
+
+
+
+    } // end loadScripts
 
   loadChips(userId)
   {
@@ -513,22 +490,6 @@ class App extends Component {
                         chipUrls: chipUrls });
       })
 
-///////// Dummy data to get view working //////////
-
-//         var dummyChips = [
-//           { chipName: "And", filename: "and.hdl"},
-//           { chipName: "Or", filename: "or.hdl"},
-//           { chipName: "ALU", filename: "alu.hdl"}
-//         ];
-//         this.setState({chips: dummyChips})
-//       })
-        // var dummyChips = [
-        //   { id: 1, chipName: "And", filename: "and.hdl"},
-        //   { id: 2, chipName: "Or", filename: "or.hdl"},
-        //   { id: 3, chipName: "ALU", filename: "alu.hdl"}
-        // ];
-        //   this.setState({chips: dummyChips})
-
 }
 
 
@@ -548,7 +509,7 @@ class App extends Component {
           handleReset={this.handleReset}
           handleEval={this.handleEval}
           handleTickTock={this.handleTickTock}
-          handleLoadScript={this.handleLoadScript}
+          handleLoadScript={this.showLoadScriptModal}
           handleBreakpoints={this.handleBreakpoints}
           showAboutModal={this.showAboutModal}
         ></MenuBar>
@@ -560,7 +521,7 @@ class App extends Component {
           handleReset={this.handleReset}
           handleEval={this.handleEval}
           handleTickTock={this.handleTickTock}
-          handleLoadScript={this.handleLoadScript}
+          handleLoadScript={this.showLoadScriptModal}
           handleBreakpoints={this.handleBreakpoints}
           handleAnimationSpeedChange={this.handleAnimationSpeedChange}
           handleAnimateTypeChange={this.handleAnimateTypeChange}
