@@ -522,17 +522,20 @@ var scriptUploadUrl = 'https://postb.in/6lAKysLW';
             {
               scriptsData.forEach((script) =>
               {
-                var scriptObj = {};
-                scriptObj.id = script.id;
-                scriptObj.scriptName = script.name;
-                scriptObj.filename = fileNameRegex.exec(script.filepath);
-                newScripts.push(scriptObj);
+                if(script.id && script.name && script.filepath)
+                {
+                  var scriptObj = {};
+                  scriptObj.id = script.id;
+                  scriptObj.scriptName = script.name;
+                  scriptObj.filename = fileNameRegex.exec(script.filepath);
+                  newScripts.push(scriptObj);
 
-                var scriptUrlObj = {};
-                scriptUrlObj.id = script.id;
-                scriptUrlObj.url = script.filepath;
+                  var scriptUrlObj = {};
+                  scriptUrlObj.id = script.id;
+                  scriptUrlObj.url = script.filepath;
 
-                scriptUrls.push(scriptUrlObj);
+                  scriptUrls.push(scriptUrlObj);
+                }
               }) 
             }
             this.setState({ scripts: newScripts,
@@ -571,17 +574,19 @@ var scriptUploadUrl = 'https://postb.in/6lAKysLW';
         {
           chipsJson.forEach((chip, index)=>
           {
-            var chipObj = {};
-            chipObj.id = chip.id;
-            chipObj.chipName = chip.name;
-            chipObj.filename = fileNameRegex.exec(chip.hdl_filepath);
-            newChips.push(chipObj)
+            if(chip.id && chip.name && chip.hdl_filepath)
+              {
+                var chipObj = {};
+                chipObj.id = chip.id;
+                chipObj.chipName = chip.name;
+                chipObj.filename = fileNameRegex.exec(chip.hdl_filepath);
+                newChips.push(chipObj)
 
-            var chipUrlObj = {};
-            chipUrlObj.id = chip.id;
-            chipUrlObj.url = chip.hdl_filepath;
-            chipUrls.push(chipUrlObj);
-
+                var chipUrlObj = {};
+                chipUrlObj.id = chip.id;
+                chipUrlObj.url = chip.hdl_filepath;
+                chipUrls.push(chipUrlObj);
+              }
           })
         }
 
